@@ -1,0 +1,23 @@
+.navbar {
+    font-size: 25px !important;
+    font-weight: bold;
+    color: white;
+}
+
+#loginState {
+    color: rgb(245, 240, 240);
+    font-size: 15px;
+}
+
+#status {
+    position: relative;
+    right: 300;
+   
+}
+
+.logOut{
+    position: absolute;
+    right: 0;
+    top:0;
+}
+
