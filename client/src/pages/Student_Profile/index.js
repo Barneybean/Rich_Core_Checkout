@@ -1,0 +1,1 @@
+export {defult} from "./Student_Profile";
