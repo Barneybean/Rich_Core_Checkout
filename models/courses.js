@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const usersSchema = new Schema({
+const coursesSchema = new Schema({
+    name: {type: String, required: true},
+    courseCode: {type: String, required: true},
+    tokenValue: {type: Number, required: true}
 });
 
-const User = mongoose.model("user", usersSchema);
+const Courses = mongoose.model("courses", coursesSchema);
 
-module.exports = User;
+module.exports = Courses;

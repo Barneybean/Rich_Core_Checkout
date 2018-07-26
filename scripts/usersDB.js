@@ -5,25 +5,44 @@ const db = require("../models");
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/dent_soft"
+  "mongodb://localhost/claude_university"
 );
 
 const usersSeed = 
-  [{
+  [
+    {
     userType: "admin",
     firstName: "Jane",
     lastName: "Doe",
     email: "jane@gmail.com",
     password: "2b$10$LFPVwvhAdMDX70xZfQGkSOUln50DCkb8x1C//yr/pXGiacCOms43.",
-    imageUrl: "",
-    userType: "",
-    phone: "",
-    birth_date: "",
-    address: "",
-    city: "",
-    state: "",
-    zip_code: ""
-  }]
+    imageUrl: " ",
+    phone: " ",
+    birth_date: " ",
+    address: " ",
+    city: " ",
+    state: " ",
+    zip_code: " ",
+    courses: [],
+    richCorePayments:[]
+  },
+  {
+    userType: "student",
+    firstName: "william",
+    lastName: "Gao",
+    email: "william@gmail.com",
+    password: "2b$10$LFPVwvhAdMDX70xZfQGkSOUln50DCkb8x1C//yr/pXGiacCOms43.",
+    imageUrl: " ",
+    phone: " ",
+    birth_date: " ",
+    address: " ",
+    city: " ",
+    state: " ",
+    zip_code: " ",
+    courses: [],
+    richCorePayments:[]
+  }
+]
   
 
 db.Users

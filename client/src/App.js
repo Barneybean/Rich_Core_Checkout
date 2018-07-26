@@ -15,6 +15,7 @@ class App extends Component {
     loginStatus: "Login",
     loggedInId: "",
     userType: "",
+    cartCount: 0
   }
   // // Cookie
   // createCookie = (name, value, days) => {
@@ -65,8 +66,8 @@ class App extends Component {
       <div className="App">
         <LogoBanner 
           loginStatus = {this.state.loginStatus}
+          cartCount = {this.state.cartCount}
         />
-        {/* <Wrapper/> */}
         <Router>
             {(this.state.loggedInId==='') ? (
               <Switch>
