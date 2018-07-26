@@ -1,1 +1,1 @@
-export {defult} from "./Cart";
+export {default} from "./Cart";

@@ -1,1 +1,1 @@
-export {defult} from "./Admin";
+export {default} from "./Admin";

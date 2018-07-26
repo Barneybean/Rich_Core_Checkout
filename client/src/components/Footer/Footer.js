@@ -4,14 +4,14 @@ import "./Footer.css";
 const Footer = () => {
 	return (
 		<div>
-			<div className="footer-top">
+			<div className="footer-top ">
 				<div className="container">
 					<div className="row">
 						<div className="col-md-3 footer-about wow fadeInUp">
 							<p>
 								Dr.William----Save your life!
 		        			</p>
-							<p><a >Our Team</a></p>
+							<p><a>Our Team</a></p>
 						</div>
 						<div className="col-md-4 offset-md-1 footer-contact wow fadeInDown">
 							<h3>Contact</h3>
@@ -47,7 +47,7 @@ const Footer = () => {
 				<div className="container">
 					<div className="row">
 						<div className="col-md-6 footer-copyright">
-							&copy; by <a href="https://google.com">William</a>
+							&copy; by <a href="https://google.com">Claude Universtiy</a>
 						</div>
 						<div className="col-md-6 footer-social">
 							<a ><i className="fab fa-facebook-f"></i></a>

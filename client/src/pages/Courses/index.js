@@ -1,1 +1,1 @@
-export {defult} from "./Courses";
+export {default} from "./Courses";

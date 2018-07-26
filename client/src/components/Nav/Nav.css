@@ -1,23 +1,22 @@
+a {
+    text-decoration: none !important;
+}
+
 .navbar {
-    font-size: 25px !important;
-    font-weight: bold;
-    color: white;
+    background-color: rgb(56,75,110);
+    height: 50px ;
+    padding: 0 ;
+    border-bottom: 6px solid rgb(238, 193, 14);
 }
 
-#loginState {
-    color: rgb(245, 240, 240);
-    font-size: 15px;
+.nav-item {
+    color: rgb(206, 203, 203) ;
 }
 
-#status {
-    position: relative;
-    right: 300;
-   
+.nav-item:hover {
+    background-color: rgb(238, 193, 14);
 }
 
-.logOut{
-    position: absolute;
-    right: 0;
-    top:0;
+.nav-link {
+    color: rgb(228, 223, 223) !important;
 }
-
