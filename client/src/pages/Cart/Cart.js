@@ -1,11 +1,14 @@
 import React, {Component} from "react";
 import "./Cart.css";
+import { Col, Row, Container } from "../../components/Grid";
 
 class Cart extends Component {
 
     render () {
         return (
-            "This is Cart Page"
+            <Container fluid>
+                "This is Cart Page"
+            </Container>
         )
     }
 }

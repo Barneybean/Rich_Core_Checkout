@@ -1,11 +1,14 @@
 import React, {Component} from "react";
 import "./Login.css";
+import { Col, Row, Container } from "../../components/Grid";
 
 class Student extends Component {
 
     render () {
         return (
-            "This is Login Page"
+            <Container fluid>
+                "This is Login Page"
+            </Container>
         )
     }
 }
