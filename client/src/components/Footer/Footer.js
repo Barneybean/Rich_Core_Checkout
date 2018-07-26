@@ -9,16 +9,15 @@ const Footer = () => {
 					<div className="row">
 						<div className="col-md-3 footer-about wow fadeInUp">
 							<p>
-								Dr.William----Save your life!
+								Claude Wang
 		        			</p>
 							<p><a>Our Team</a></p>
 						</div>
 						<div className="col-md-4 offset-md-1 footer-contact wow fadeInDown">
 							<h3>Contact</h3>
-							<p><i className="fas fa-map-marker-alt"></i> 3900 Adeline St</p>
-							<p><i className="fas fa-phone"></i> Phone: (520)301-7980</p>
-							<p><i className="fas fa-envelope"></i> Email: <a href="mailto:hello@domain.com">williamNo1@gmail.com</a></p>
-							<p><i className="fab fa-skype"></i> Skype: you_online</p>
+							<p><i className="fas fa-map-marker-alt"></i> 1631 N 1st St s200, San Jose CA 95112</p>
+							<p><i className="fas fa-phone"></i> Phone: (408)571-6516</p>
+							<p><i className="fas fa-envelope"></i> Email: <a href="mailto:hello@domain.com">usj@usjus.edu</a></p>
 						</div>
 						<div className="col-md-4 footer-links wow fadeInUp">
 							<div className="row">
