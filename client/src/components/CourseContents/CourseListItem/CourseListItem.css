@@ -1,0 +1,28 @@
+.courseImage {
+    margin: 40px 40px;
+    float: left;
+    height: 18.2vw;
+    width: 18vw;
+    border: 2px solid rgb(25, 62, 73);
+}
+
+.courseTitle {
+    z-index: 100;
+    background-color: rgb(232, 235, 236);
+    width: 18vw;
+    min-height: 18px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.courseImage > img {
+    margin: 0 auto;
+    height: 18vw;
+    width: 18vw;
+}
+
+.courseImage > img:hover {
+    border-style: outset;
+}

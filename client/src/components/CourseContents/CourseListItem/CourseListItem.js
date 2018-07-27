@@ -1,11 +1,11 @@
 import React from "react"
 import "./CourseListItem.css"
 
-const CourseListItem = ({courseImage, name}) => (
+const CourseListItem = ({course, getDetail}) => (
 
-    <div>
-        <img src={courseImage} alt={name}/>
-        <span>{name}</span>
+    <div className="courseImage">
+        <img src={course.courseImage} alt={course.name} onClick={()=>{getDetail(course)}}/>
+        <p className="courseTitle">{course.name}</p>
     </div>
 )
 
