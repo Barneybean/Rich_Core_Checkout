@@ -13,17 +13,20 @@ const coursesSeed =
     {
       name: "Blockchain in Real Estate",
       courseCode: "BCA-BRE-1303",
-      tokenValue: 40000
+      tokenValue: 40000,
+      courseImage: ""
     },
     {
       name: "Blockchain in Fintech",
       courseCode: "BCA-BF-1302",
-      tokenValue: 40000
+      tokenValue: 40000,
+      courseImage: ""
     },
     {
       name: "Block Chain Overview",
       courseCode: "BCA-BRE-1301",
-      tokenValue: 40000
+      tokenValue: 40000,
+      courseImage: ""
     }
   ]
 

@@ -6,8 +6,9 @@ import Cart from "../Cart"
 
 
 const LogoBanner = ({loginStatus, cartCount}) => (
+    // <div className="sticky-top">
     <div>
-        <div id="logo" className="pt-0 mx-0 bg-white sticky-top">
+        <div id="logo" className="pt-0 mx-0 bg-white">
             <div className="row">
                 <div className="col-md-8 pb-2 pt-2 align-items-center logo">
                     <a href="/"><img src={logo} height="80px" width="460px" alt="Claude University Logo"/></a>

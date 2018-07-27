@@ -17,49 +17,49 @@ class App extends Component {
     userType: "",
     cartCount: 0
   }
-  // // Cookie
-  // createCookie = (name, value, days) => {
-  //   if (days) {
-  //     let date = new Date();
-  //     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-  //     var expires = "; expires=" + date.toGMTString();
-  //   }
-  //   else expires = "";
+  // Cookie
+  createCookie = (name, value, days) => {
+    if (days) {
+      let date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      var expires = "; expires=" + date.toGMTString();
+    }
+    else expires = "";
 
-  //   document.cookie = name + "=" + value + expires + "; path=/";
-  // }
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }
 
-  // readCookie = a => {
-  //   var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
-  //   return b ? b.pop() : '';
-  // }
+  readCookie = a => {
+    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+  }
 
-  // eraseCookie = (name) => {
-  //   this.createCookie(name, "", -1);
-  // }
+  eraseCookie = (name) => {
+    this.createCookie(name, "", -1);
+  }
 
-  // checkLogIn = (loggedInId) => {
-  //   // console.log("APP", loggedInId)
-  //   if (!loggedInId === "") {
-  //     this.setState({
-  //       loggedInId: loggedInId
-  //     })
-  //   } else {
-  //     this.setState({
-  //       loggedInId: ""
-  //     })
-  //   }
-  // }
+  checkLogIn = (loggedInId) => {
+    // console.log("APP", loggedInId)
+    if (!loggedInId === "") {
+      this.setState({
+        loggedInId: loggedInId
+      })
+    } else {
+      this.setState({
+        loggedInId: ""
+      })
+    }
+  }
 
-  // //******************log out */
-  // logOut = () => {
-  //   this.eraseCookie("loggedinId")
-  //   this.setState({
-  //     loggedInId: ""
-  //   })
-  //   this.redirect()
-  // }
-  // //##################end logout
+  //******************log out */
+  logOut = () => {
+    this.eraseCookie("loggedinId")
+    this.setState({
+      loggedInId: ""
+    })
+    this.redirect()
+  }
+  //##################end logout
 
   render() {
     return (

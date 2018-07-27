@@ -10,5 +10,9 @@ const userRoutes = require("./users");
 
 router.use("/user", userRoutes);
 
+const courseRoutes = require("./courses");
+
+router.use("/courses", courseRoutes);
+
 
 module.exports = router;

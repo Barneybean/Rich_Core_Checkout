@@ -33,6 +33,8 @@ export default {
     },
     updateByGoogleId: (id, object) => {
         return axios.post("/api/user/google/type/" + id, object);
+    },
+    getCourses: () => {
+        return axios.get("/api/courses");
     }
-
 }
