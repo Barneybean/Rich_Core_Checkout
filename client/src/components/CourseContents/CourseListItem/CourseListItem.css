@@ -1,5 +1,5 @@
 .courseImage {
-    margin: 40px 40px;
+    margin: 40px 30px;
     float: left;
     height: 18.2vw;
     width: 18vw;
@@ -25,4 +25,16 @@
 
 .courseImage > img:hover {
     border-style: outset;
+}
+
+@media only screen and (max-width: 767px) {
+    .courseTitle {
+        font-size: 0.5rem;
+    }
+}
+
+@media only screen and (max-width: 376px) {
+    .courseTitle {
+        font-size: 0.3rem;
+    }
 }

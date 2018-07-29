@@ -1,5 +1,8 @@
 a {
     text-decoration: none !important;
     color: rgb(12, 12, 12) !important;
+}
 
+.App{
+    background-color: rgb(250, 249, 249);
 }

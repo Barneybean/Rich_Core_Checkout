@@ -17,10 +17,10 @@ class App extends Component {
     loginStatus: "Login",
     loggedInId: "",
     userType: "",
-    cartCount: 0,
     courses: [],
-    selectedCoursesInCart: [],
-    errorNotice: ''
+    selectedCourseForDetail: [],
+    addedToCart: [],
+    errorNotice: '',
   }
 
   componentWillMount() {
@@ -33,7 +33,8 @@ class App extends Component {
         result=>{
         // console.log(result);
         this.setState({
-          courses: result.data
+          courses: result.data,
+          selectedCourseForDetail: [result.data[0]]
         })
     })
     .catch(err=>{
@@ -42,72 +43,33 @@ class App extends Component {
     })
   }
 
-  // showCourseDetail = (course) => {
-  //   console.log("app, selected", course)
-  //   this.setState({"selectedCourses": course})
-  // }
-
-  addToCart = (id) => {
-    console.log("added", id)
+  viewCourseDetail = (course) => {
+    // console.log("view detail", course)
+    this.setState({"selectedCourseForDetail": course})
+  
   }
 
-  // Cookie
-  createCookie = (name, value, days) => {
-    if (days) {
-      let date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      var expires = "; expires=" + date.toGMTString();
-    }
-    else expires = "";
-
-    document.cookie = name + "=" + value + expires + "; path=/";
+  addToCart = (course) => {
+    console.log("added to Cart", course)
+    let courseArr = [];
+    courseArr.push(course);
+    this.setState({addedToCart: courseArr})
   }
-
-  readCookie = a => {
-    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
-    return b ? b.pop() : '';
-  }
-
-  eraseCookie = (name) => {
-    this.createCookie(name, "", -1);
-  }
-
-  checkLogIn = (loggedInId) => {
-    // console.log("APP", loggedInId)
-    if (!loggedInId === "") {
-      this.setState({
-        loggedInId: loggedInId
-      })
-    } else {
-      this.setState({
-        loggedInId: ""
-      })
-    }
-  }
-
-  //******************log out */
-  logOut = () => {
-    this.eraseCookie("loggedinId")
-    this.setState({
-      loggedInId: ""
-    })
-    this.redirect()
-  }
-  //##################end logout
 
   render() {
-    // console.log("app render", this.state.courses)
+    console.log("app render", this.state.selectedCourseForDetail)
+    console.log("app render", this.state.courses)
     return (
       <div className="App">
         <LogoBanner 
           loginStatus = {this.state.loginStatus}
-          cartCount = {this.state.cartCount}
+          cartCount = {this.state.addedToCart.length}
         />
         <Router>
             {(this.state.loggedInId==='') ? (
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/courses" component={()=> (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} addToCart={this.addToCart}/>)} />
+                <Route exact path="/courses" component={()=> (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.state.viewCourseDetail} addToCart={this.addToCart}/>)} />
                 <Route exact path="/cart" component={Cart} />
                 <Route exact path="/login" component={Login} />
                 <Redirect from="/student" to="/login" />

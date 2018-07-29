@@ -13,19 +13,13 @@ class Courses extends Component {
         super(props)
         this.state = {
             errorNotice: props.errorNotice,
-            selectedCourseForDetail: {},
         }
-    }
-
-    viewCourseDetail = (course) => {
-        // console.log("view detail", course)
-        this.setState({"selectedCourseForDetail": course})
-      
     }
     
     render () {
-        console.log(this.props.courses)
-        // console.log(this.state.selectedCourseForDetail)
+        // console.log(this.props.courses)
+        // const item = this.props.selectedCourseForDetail
+        // console.log(item)
         return (
             <Container fluid>
                 <Row fluid> 
@@ -40,15 +34,24 @@ class Courses extends Component {
                                 <CourseListItem
                                     key = {i}
                                     course={item}
-                                    getDetail = {this.viewCourseDetail}
+                                    getDetail = {this.props.viewCourseDetail}
                                 />
                             )
                         })}
                     </Col>
                     <div className="col-lg-6" id="detailContainer">
-                        <CourseDetail
-                            selectedCourseForDetail={this.state.selectedCourseForDetail}
-                        />
+                        {this.props.selectedCourseForDetail.map((item, i) => {
+                            return (<CourseDetail
+                                    key={i}
+                                    name={item.name}
+                                    _id={item._id}
+                                    courseImage={item.courseImage}
+                                    tokenValue={item.tokenValue}
+                                    courseDetail={item.courseDetail}
+                                    addToCart={this.props.addToCart}
+                                />
+                            )
+                        })}
                     </div>
                 </Row>
             </Container>

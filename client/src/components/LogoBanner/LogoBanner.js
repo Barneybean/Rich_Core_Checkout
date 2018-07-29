@@ -7,7 +7,7 @@ import Cart from "../Cart"
 
 const LogoBanner = ({loginStatus, cartCount}) => (
     // <div className="sticky-top">
-    <div>
+    <div className="bg">
         <div id="logo" className="pt-0 mx-0 bg-white">
             <div className="row">
                 <div className="col-md-8 pb-2 pt-2 align-items-center logo">
