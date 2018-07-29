@@ -22,3 +22,7 @@ h5 h6 {
 #detailDisplay {
     overflow: auto
 }
+
+h6 > span {
+    font-weight: 700;
+}

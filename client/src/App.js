@@ -45,15 +45,17 @@ class App extends Component {
 
   viewCourseDetail = (course) => {
     // console.log("view detail", course)
-    this.setState({"selectedCourseForDetail": course})
+    this.setState({"selectedCourseForDetail": [course]})
   
   }
 
-  addToCart = (course) => {
-    console.log("added to Cart", course)
-    let courseArr = [];
-    courseArr.push(course);
-    this.setState({addedToCart: courseArr})
+  addToCart = (courseImage, _id, name, tokenValue, courseCode) => {
+    //if logged in then write to db, else write into local storage
+    console.log("added to Cart", )
+    let addCourse = {
+      courseImage, _id, name, tokenValue, courseCode
+    };
+    this.state.addedToCart.push(addCourse)
   }
 
   render() {
@@ -69,7 +71,7 @@ class App extends Component {
             {(this.state.loggedInId==='') ? (
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/courses" component={()=> (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.state.viewCourseDetail} addToCart={this.addToCart}/>)} />
+                <Route exact path="/courses" component={()=> (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart}/>)} />
                 <Route exact path="/cart" component={Cart} />
                 <Route exact path="/login" component={Login} />
                 <Redirect from="/student" to="/login" />
@@ -81,7 +83,7 @@ class App extends Component {
                 <Switch>
                   <Route exact path="/" component={Home}/>
                   <Route exact path="/admin" component={Admin}/>
-                  <Route exact path="/courses" component={()=> (<Courses courselist={this.state.courses} errorNotice={this.state.errorNotice} addToCart={this.addToCart}/>)} />
+                  <Route exact path="/courses" component={()=> (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart}/>)} />
                   <Route exact path="/cart" component={Cart} />
                   <Route exact path="/login" component={Login} />
                   <Redirect from="/student" to="/login" />
@@ -91,7 +93,7 @@ class App extends Component {
                 <Switch>
                 <Route exact path="/" component={Home}/>
                   <Route exact path="/student" component={Student}/>
-                  <Route exact path="/courses" component={()=> (<Courses courselist={this.state.courses} errorNotice={this.state.errorNotice} addToCart={this.addToCart}/>)} />
+                  <Route exact path="/courses" component={()=> (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart}/>)} />
                   <Route exact path="/cart" component={Cart} />
                   <Route exact path="/login" component={Login} />
                   <Redirect from="/admin" to="/login" />
