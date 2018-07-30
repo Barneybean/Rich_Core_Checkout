@@ -98,8 +98,8 @@ class App extends Component {
 
   render() {
     // console.log("app render", this.state.selectedCourseForDetail)
-    console.log("app render", this.state.courses)
-    console.log(this.state.addedToCart)
+    // console.log("app render", this.state.courses)
+    // console.log(this.state.addedToCart)
     return (
       <div className="App">
         <LogoBanner

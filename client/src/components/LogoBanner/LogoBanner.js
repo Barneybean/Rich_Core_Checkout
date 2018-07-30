@@ -2,7 +2,7 @@ import React from "react"
 import "./LogoBanner.css"
 import logo from "../../assets/images/Claude_University_Logo.png"
 import Nav from "../Nav"
-import CartIcon from "../Cart"
+import CartIcon from "../CartIcon"
 
 
 const LogoBanner = ({loginStatus, cartCount}) => (
