@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./Cart.css";
-import { Col, Row, Container } from "../../components/Grid";
+import { Container } from "../../components/Grid";
 
 class Cart extends Component {
 

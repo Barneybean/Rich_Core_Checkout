@@ -3,7 +3,7 @@ import "./CourseDetail.css"
 
 // const CourseDetail = ({ courseImage, _id, name, tokenValue, courseCode, courseDetail }) => (
 const CourseDetail = (props) => {
-    const {courseImage, _id, name, tokenValue, courseCode, courseDetail} = props
+    const {courseImage, _id, name, tokenValue, courseCode, courseDetail, addToCart} = props
     return (
         <div id="detailDisplay">
             {courseImage ? (
@@ -11,7 +11,7 @@ const CourseDetail = (props) => {
                     <img id={_id} src={courseImage} alt={name}/>
                     <hr/>
                     <button type="button" className="btn btn-raised btn-danger"
-                        onClick={()=>{this.props.addToCart(this.props.selectedCourseForDetail)}}
+                        onClick={()=>{addToCart(courseImage, _id, name, tokenValue, courseCode)}}
                     >Add To Cart</button>
                 </div>
             ):( 
@@ -19,7 +19,7 @@ const CourseDetail = (props) => {
                     <img id="default" src={courseImage} alt="default"/>
                     <hr/>
                     <button type="button" className="btn btn-raised btn-danger"
-                        onClick={()=>{this.props.addToCart(courseImage, _id, name, tokenValue, courseCode)}}
+                        onClick={()=>{addToCart(courseImage, _id, name, tokenValue, courseCode)}}
                     >Add To Cart</button>
                 </div>
             )}

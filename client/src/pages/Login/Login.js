@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./Login.css";
-import { Col, Row, Container } from "../../components/Grid";
+import { Container } from "../../components/Grid";
 
 class Student extends Component {
 
