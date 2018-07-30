@@ -1,9 +1,9 @@
 import React from "react"
 import "./CourseDetail.css"
 
-// const CourseDetail = ({ courseImage, _id, name, tokenValue, courseCode, courseDetail }) => (
 const CourseDetail = (props) => {
     const {courseImage, _id, name, tokenValue, courseCode, courseDetail, addToCart} = props
+    console.log(courseCode)
     return (
         <div id="detailDisplay">
             {courseImage ? (

@@ -2,7 +2,7 @@ import React from "react"
 import "./LogoBanner.css"
 import logo from "../../assets/images/Claude_University_Logo.png"
 import Nav from "../Nav"
-import Cart from "../Cart"
+import CartIcon from "../Cart"
 
 
 const LogoBanner = ({loginStatus, cartCount}) => (
@@ -14,7 +14,7 @@ const LogoBanner = ({loginStatus, cartCount}) => (
                     <a href="/"><img src={logo} height="80px" width="460px" alt="Claude University Logo"/></a>
                 </div>
                 <div className="col-md-2">
-                    <Cart 
+                    <CartIcon 
                         cartCount={cartCount}
                     />
                 </div>

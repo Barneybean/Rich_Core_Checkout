@@ -1,0 +1,17 @@
+.itemInCart > img {
+    height: 7rem;
+    width: 7rem;
+    float: left;
+    margin-right: 1rem;
+}
+
+.itemInCart {
+    height: 8rem;
+    margin: 15px 10px;
+    padding: 0.5rem;
+    color: rgb(4, 48, 119);
+}
+
+#token {
+    float: right;
+}

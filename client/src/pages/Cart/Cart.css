@@ -1,0 +1,15 @@
+#cartBody {
+    background-Color: rgb(244, 247, 252);
+}
+
+#itemList {
+    border-top: 2px solid grey;
+    border-bottom: 2px solid grey;
+}
+
+#MyCart {
+    color: rgb(78, 139, 237);
+    font-weight: 600;
+    font-size: 2.5rem;
+}
+

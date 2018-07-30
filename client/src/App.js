@@ -61,7 +61,6 @@ class App extends Component {
       let cartArr = this.state.addedToCart;
       //prevent duplicate
       let match = false;
-      console.log(cartArr)
       for (let i=0;i<cartArr.length; i++) {
         if (cartArr[i].name === addCourse.name) {
           match = true;
@@ -92,10 +91,15 @@ class App extends Component {
     }
   }
 
+  deleteItemInCart = (id) => {
+    //find matching name and delete
+    console.log("delete course in cart", id)
+  }
+
   render() {
     // console.log("app render", this.state.selectedCourseForDetail)
     console.log("app render", this.state.courses)
-    // console.log(this.state.addedToCart)
+    console.log(this.state.addedToCart)
     return (
       <div className="App">
         <LogoBanner
@@ -107,7 +111,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} />)} />
-              <Route exact path="/cart" component={Cart} />
+              <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
               <Route exact path="/login" component={Login} />
               <Redirect from="/student" to="/login" />
               <Redirect from="/admin" to="/login" />
@@ -119,7 +123,7 @@ class App extends Component {
                   <Route exact path="/" component={Home} />
                   <Route exact path="/admin" component={Admin} />
                   <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} />)} />
-                  <Route exact path="/cart" component={Cart} />
+                  <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
                   <Route exact path="/login" component={Login} />
                   <Redirect from="/student" to="/login" />
                   <Route component={NoMatch} />
@@ -129,7 +133,7 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/student" component={Student} />
                     <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} />)} />
-                    <Route exact path="/cart" component={Cart} />
+                    <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
                     <Route exact path="/login" component={Login} />
                     <Redirect from="/admin" to="/login" />
                     <Route component={NoMatch} />
