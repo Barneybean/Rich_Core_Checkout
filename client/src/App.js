@@ -60,7 +60,15 @@ class App extends Component {
       };
       let cartArr = this.state.addedToCart;
       //prevent duplicate
-      if (cartArr.indexOf(addCourse) === -1) {
+      let match = false;
+      console.log(cartArr)
+      for (let i=0;i<cartArr.length; i++) {
+        if (cartArr[i].name === addCourse.name) {
+          match = true;
+        }
+      }
+      console.log("bool",match)
+      if (!match) {
         cartArr.push(addCourse);
       }
       //...
@@ -87,7 +95,7 @@ class App extends Component {
   render() {
     // console.log("app render", this.state.selectedCourseForDetail)
     console.log("app render", this.state.courses)
-    console.log(this.state.addedToCart)
+    // console.log(this.state.addedToCart)
     return (
       <div className="App">
         <LogoBanner
