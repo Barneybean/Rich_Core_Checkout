@@ -1,3 +1,3 @@
-export * from "./Input";
+export * from "./PlainInput";
 export * from "./TextArea";
 export * from "./FormBtn";

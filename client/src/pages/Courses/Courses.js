@@ -56,7 +56,8 @@ class Courses extends Component {
                     </Col>
                     <div className="col-lg-6" id="detailContainer">
                         {this.props.selectedCourseForDetail.map((item, i) => {
-                            return (<CourseDetail
+                            return (
+                                <CourseDetail
                                     key={i}
                                     name={item.name}
                                     _id={item._id}

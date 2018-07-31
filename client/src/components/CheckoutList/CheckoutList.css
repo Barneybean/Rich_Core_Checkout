@@ -12,6 +12,10 @@
     color: rgb(4, 48, 119);
 }
 
+.content{
+    width: 55%
+}
+
 #token {
     float: right;
 }
