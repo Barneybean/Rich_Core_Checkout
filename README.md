@@ -1,3 +1,5 @@
 # Rich_Core_Checkout
 
-A course category with block chain payment
+A course category with block chain payment    
+
+Developer: Chunjin (William) Gao
