@@ -4,6 +4,7 @@ import DelBtn from "../DelBtn"
 
 const CheckoutList = (props)=> {
     const {courseCode, courseImage, name, tokenValue, deleteItemInCart} = props
+    // console.log(courseCode)
     return (
         <div className="itemInCart">
             <img src={courseImage} alt={name}/>

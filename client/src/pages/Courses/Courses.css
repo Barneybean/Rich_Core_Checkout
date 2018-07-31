@@ -1,4 +1,13 @@
 #detailContainer {
     border-left: 2px solid green;
+}
 
+#addModelBody {
+    width: 60vw;
+}
+
+@media only screen and (max-width: 581px) {
+   .btn-responsive {
+       font-size: 10px !important;
+   }
 }

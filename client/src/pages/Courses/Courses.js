@@ -5,7 +5,7 @@ import Alert from "../../components/Alert"
 import Objective from "../../components/Objective/Objective"
 import CourseDetail from "../../components/CourseContents/CourseDetail"
 import CourseListItem from "../../components/CourseContents/CourseListItem"
-
+import AddedModal from "../../components/Modals/AddedModal"
 
 class Courses extends Component {
 
@@ -20,12 +20,27 @@ class Courses extends Component {
         // console.log(this.props.courses)
         // const item = this.props.selectedCourseForDetail
         // console.log(item)
+        console.log(this.props.isModalOpen)
         return (
             <Container fluid>
                 <Row fluid> 
                     <Objective/>
                 </Row>
                 <hr/>
+                <AddedModal isOpen={this.props.isModalOpen} onClose={() => this.props.closeModal()}>
+                        <div id="addModelBody">
+                            <div className="modal-content">
+                            <div className="modal-header">
+                                <p>One Item Added To Cart</p>
+                            </div>
+                            <div className="modal-footer">
+                                <a href="/cart"><button type="button" className="btn btn-primary btn-responsive">View Cart</button></a>
+                                <br/>
+                                <button type="button" className="btn btn-secondary btn-responsive" data-dismiss="modal" onClick={() => this.props.closeModal()}>Continue</button>
+                            </div>
+                            </div>
+                        </div>
+                </AddedModal>
                 <Row> 
                     {this.state.errorNotice ? (<Alert notice={this.state.errorNotice}/>):(null)}
                     <Col size="lg-6">
@@ -48,7 +63,10 @@ class Courses extends Component {
                                     courseImage={item.courseImage}
                                     tokenValue={item.tokenValue}
                                     courseDetail={item.courseDetail}
+                                    courseCode={item.courseCode}
                                     addToCart={this.props.addToCart}
+                                    openModal={this.props.openModal}
+                                    closeModal={this.props.closeModal}
                                 />
                             )
                         })}

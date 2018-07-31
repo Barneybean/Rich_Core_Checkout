@@ -21,6 +21,7 @@ class App extends Component {
     selectedCourseForDetail: [],
     addedToCart: [],
     errorNotice: '',
+    isModalOpen: false
   }
   //react child cannot be obj so has to be arr to hols obj!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! and use map to read arr in child 
 
@@ -51,6 +52,11 @@ class App extends Component {
 
   }
 
+  writeToLocalStorage = (name, item) => {
+    localStorage.removeItem(name);
+    localStorage.setItem(name, item);
+  }
+
   addToCart = (courseImage, _id, name, tokenValue, courseCode) => {
     //if logged in then write to db, else write into local storage
     if (this.state.loggedInId === "") {
@@ -74,11 +80,20 @@ class App extends Component {
       this.setState({ addedToCart: cartArr })
       //store courses in cart to session storage so it will stay when navigating to other pages
       let cartItems = JSON.stringify(cartArr);
-      localStorage.removeItem("cartItems");
-      localStorage.setItem("cartItems", cartItems);
+      this.writeToLocalStorage("cartItems", cartItems);
+      // alert("New Item Added")
     } else {
       // write in to db associate with logged in id
     }
+  }
+
+  openModal = () => {
+    console.log("opened")
+    this.setState({ isModalOpen: true })
+  }
+
+  closeModal= () => {
+    this.setState({ isModalOpen: false })
   }
 
   loadCart = () => {
@@ -94,12 +109,27 @@ class App extends Component {
   deleteItemInCart = (id) => {
     //find matching name and delete
     console.log("delete course in cart", id)
+    let a = this.state.addedToCart
+    //find the matching course to delete by courseCode
+    let index = "";
+    for (let j=0; j<a.length; j++) {
+      if (a[j].courseCode === id) {
+        index = j;
+      }
+    }
+    //remove course from the arr     cannot mutate state directly must  
+    a.splice(index, 1)
+    this.setState({addedToCart: a})
+    //update local storage too
+    let updateCart = JSON.stringify(a);
+    this.writeToLocalStorage("cartItems", updateCart);
   }
 
   render() {
     // console.log("app render", this.state.selectedCourseForDetail)
     // console.log("app render", this.state.courses)
     // console.log(this.state.addedToCart)
+    console.log("new cart", this.state.addedToCart)
     return (
       <div className="App">
         <LogoBanner
@@ -110,7 +140,7 @@ class App extends Component {
           {(this.state.loggedInId === '') ? (
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} />)} />
+              <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
               <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
               <Route exact path="/login" component={Login} />
               <Redirect from="/student" to="/login" />
@@ -122,7 +152,7 @@ class App extends Component {
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route exact path="/admin" component={Admin} />
-                  <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} />)} />
+                  <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
                   <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
                   <Route exact path="/login" component={Login} />
                   <Redirect from="/student" to="/login" />
@@ -132,7 +162,7 @@ class App extends Component {
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/student" component={Student} />
-                    <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} />)} />
+                    <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
                     <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
                     <Route exact path="/login" component={Login} />
                     <Redirect from="/admin" to="/login" />

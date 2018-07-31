@@ -3,12 +3,11 @@ import "./Cart.css"
 import { Row, Container } from "../../components/Grid"
 import CheckoutList from "../../components/CheckoutList"
 
-
 class Cart extends Component {
-    constructor () {
-        super ()
+    constructor (props) {
+        super (props)
         this.state={
-            tokenTotal:0
+            tokenTotal:0,
         }
     }
 
@@ -20,7 +19,7 @@ class Cart extends Component {
         console.log(this.props.addedToCart)
         let tokens=0;
         this.props.addedToCart.map((item)=>{
-            tokens += item.tokenValue
+            return tokens += item.tokenValue
         })
         //add "," as number seperator that also support decimals
         tokens = tokens.toLocaleString()
@@ -31,6 +30,7 @@ class Cart extends Component {
     } 
 
     render () {
+        // console.log(this.props)
         return (
             <div id="cartBody">
                 <Container fluid>
