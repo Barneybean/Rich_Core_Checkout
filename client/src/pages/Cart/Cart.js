@@ -2,8 +2,9 @@ import React, { Component } from "react"
 import "./Cart.css"
 import { Row, Container } from "../../components/Grid"
 import CheckoutList from "../../components/CheckoutList"
-import {PlainInput, FormBtn} from "../../components/Form"
+import {PlainInput} from "../../components/Form"
 import StateDrop from "../../components/StateDrop"
+import RichCoreBtn from "../../components/RichCoreBtn"
 
 class Cart extends Component {
     constructor(props) {
@@ -18,7 +19,6 @@ class Cart extends Component {
             zipcode: "",
             state: "",
             province: "",
-            country: ""
         }
     }
 
@@ -32,9 +32,8 @@ class Cart extends Component {
         this.props.addedToCart.map((item) => {
             return tokens += item.tokenValue
         })
-        //add "," as number seperator that also support decimals
+        //add "," as number seperator that also support decimal
         tokens = tokens.toLocaleString()
-
         this.setState({
             tokenTotal: tokens
         })
@@ -49,7 +48,19 @@ class Cart extends Component {
 
     handleTokenSubmit = (event) => {
         event.preventDefault();
+        let paymentInfo = {
+            tokenTotal: this.state.tokenTotal,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            address: this.state.address,
+            city: this.state.city,
+            zipcode: this.state.zipcode,
+            state: this.state.state,
+            province: this.state.province,
+        }
 
+        console.log("payment", paymentInfo)
     }
 
     render() {
@@ -59,7 +70,7 @@ class Cart extends Component {
                 <Container fluid>
                     <Row>
                         <div className="col-lg-6 p-3">
-                            <span id="MyCart">My Cart</span>
+                            <span className="header">My Cart</span>
                             <div id="itemList">
                                 {this.props.addedToCart.map((item, i) => {
                                     return (
@@ -80,6 +91,7 @@ class Cart extends Component {
                             </div>
                         </div>
                         <div className="col-lg-6 p-5">
+                            <span className="header">Checkout</span>
                             <div className="row">
                                 <div className="col-md-6">
                                     <PlainInput
@@ -126,7 +138,7 @@ class Cart extends Component {
                                     </div>
                                 
                                     <PlainInput
-                                        label="Province"
+                                        label="Province "
                                         value={this.state.province}
                                         onChange={this.handleInputChange}
                                         name="Province"
@@ -138,10 +150,10 @@ class Cart extends Component {
                                         onChange={this.handleInputChange}
                                         name="zipcode"
                                     />
-                                   
-                                    <FormBtn>
-                                        <img src="../../assets/images/richcorelogo.png" alt="Pay With RichCore"/>
-                                    </FormBtn>
+                                    <RichCoreBtn
+                                        disabled={!(this.state.firstName && this.state.lastName && this.state.email)}
+                                        handleTokenSubmit={this.handleTokenSubmit}
+                                    />
                                 </div>
                             </div>
                         </div>
