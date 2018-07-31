@@ -34,7 +34,7 @@ class Courses extends Component {
                                 <p>One Item Added To Cart</p>
                             </div>
                             <div className="modal-footer">
-                                <a href="/cart"><button type="button" className="btn btn-primary btn-responsive">View Cart</button></a>
+                                <a href="/cart" hidefocus="hidefocus"><button type="button" className="btn btn-primary btn-responsive">View Cart</button></a>
                                 <br/>
                                 <button type="button" className="btn btn-secondary btn-responsive" data-dismiss="modal" onClick={() => this.props.closeModal()}>Continue</button>
                             </div>

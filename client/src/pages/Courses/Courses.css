@@ -1,3 +1,7 @@
+a {
+    outline: none !important;
+}
+
 #detailContainer {
     border-left: 2px solid green;
 }

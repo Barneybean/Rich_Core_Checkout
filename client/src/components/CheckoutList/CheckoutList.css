@@ -1,6 +1,6 @@
 .itemInCart > img {
-    height: 7rem;
-    width: 7rem;
+    height: auto;
+    width: 7em ;
     float: left;
     margin-right: 1rem;
 }
@@ -14,4 +14,46 @@
 
 #token {
     float: right;
+}
+
+@media only screen and (max-width: 600px) {
+    .itemInCart > img {
+        height: 5rem;
+        width: 5rem;
+        margin-right: 1rem;
+    }
+    .itemInCart {
+        height: 8rem;
+        margin: 15px 0px;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .content{
+        width:2rem
+    }
+    .content > h5 {
+        font-size: 10px;
+    }
+    .content > h6 {
+        font-size: 10px;
+    }
+    #token {
+        float: left;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .itemInCart > img {
+        height: auto;
+        width: 3rem;
+    }
+    .itemInCart {
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 4rem;
+    }
+    .content{
+        width: 200px;
+    }
+    
 }

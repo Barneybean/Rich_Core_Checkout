@@ -35,7 +35,7 @@ class Cart extends Component {
             <div id="cartBody">
                 <Container fluid>
                     <Row>
-                        <div className="col-lg-6 p-5">
+                        <div className="col-lg-6 p-3">
                             <span id="MyCart">My Cart</span>
                             <div id="itemList">
                                 {this.props.addedToCart.map((item, i)=>{
