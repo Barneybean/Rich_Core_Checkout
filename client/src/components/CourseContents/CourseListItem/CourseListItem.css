@@ -8,7 +8,7 @@
 
 .courseTitle {
     z-index: 100;
-    background-color: rgb(232, 235, 236);
+    /* background-color: rgb(232, 235, 236); */
     width: 18vw;
     min-height: 18px;
     text-align: center;

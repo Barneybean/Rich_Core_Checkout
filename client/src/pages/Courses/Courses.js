@@ -13,6 +13,20 @@ class Courses extends Component {
         super(props)
         this.state = {
             errorNotice: props.errorNotice,
+            isObjDisplayed: "d-none",
+        }
+    }
+    //to hide Objective on scroll down
+    componentDidMount() {
+    window.addEventListener('scroll', this.hideObjective);
+    }
+
+    hideObjective = ()=> {
+        if (window.scrollY >10) {
+            this.setState({isObjDisplayed: ""});
+        }
+        else if (window.scrollY <= 10) {
+            this.setState({isObjDisplayed: "d-none"});
         }
     }
     
@@ -24,7 +38,9 @@ class Courses extends Component {
         return (
             <Container fluid>
                 <Row fluid> 
-                    <Objective/>
+                    <Objective
+                        display={this.state.isObjDisplayed}
+                    />
                 </Row>
                 <hr/>
                 <AddedModal isOpen={this.props.isModalOpen} onClose={() => this.props.closeModal()}>
