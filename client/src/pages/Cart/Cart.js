@@ -12,6 +12,7 @@ class Cart extends Component {
         super(props)
         this.state = {
             tokenTotal: 0,
+            subTotalForDisplay: 0,
             firstName: "",
             lastName: "",
             email: "",
@@ -33,10 +34,14 @@ class Cart extends Component {
         this.props.addedToCart.map((item) => {
             return tokens += item.tokenValue
         })
+        //no "," for apiurl
+        this.setState({
+            tokenTotal: tokens
+        })
         //add "," as number seperator that also support decimal
         tokens = tokens.toLocaleString()
         this.setState({
-            tokenTotal: tokens
+            subTotalForDisplay: tokens
         })
     }
 
@@ -49,11 +54,21 @@ class Cart extends Component {
 
     sha256Hash = (string) => {
         //call API and hash in server
+        let urlObj = {url: string}
+        API.hash(urlObj)
+        .then(result=>{
+            console.log(result)
+        })
+        .catch(err => {
+            console.log(err)
+            alert("hash error..")
+        });
     }
 
     //initiate richcore payment
     handleTokenSubmit = (event) => {
         event.preventDefault();
+        //add invoice numer  ############################
         let paymentInfo = {
             tokenTotal: this.state.tokenTotal,
             firstName: this.state.firstName,
@@ -65,26 +80,31 @@ class Cart extends Component {
             state: this.state.state,
             province: this.state.province,
         }
+        const {tokenTotal, firstName, lastName, email, address, city, zipcode, state, province} = paymentInfo
         // console.log("payment", paymentInfo)
 
-        let urlunhashed="";
-        this.sha256Hash(urlunhashed)
-        .then(result=>{
-            console.log(result)
-        })
-        .catch(err => {
-            console.log(err)
-            alert("payment err, please check your Rich Core balnce and try again")
-        });
+        let mainStr=`https://www.richcore.com/rich/pay`
+        let amount = `&amount=${tokenTotal}`
+        let comment = `&comment=${firstName}%${lastName}%${email}%${"course%purchase"}`;
+        let merchantkey = `&merchantKey=34b5DF28e68d833E97316671EC192ADd762864e076abB0b6b750189Cccf54330`;
+        let notifyUrl = `&http://localhost:3000/`;
+        let refNo = `&00000000001`;
+        let returnUrl = `&http://localhost:3000/courses`
+        let signature = ""
+        let urlunhashed = mainStr + amount + comment + merchantkey+notifyUrl+refNo+returnUrl
 
-        API.richCorePayment()
-        .then(result => {
-            console.log(result)
-        })
-        .catch(err => {
-            console.log(err)
-            alert("payment err, please check your Rich Core balnce and try again")
-        })
+        console.log(urlunhashed)
+        this.sha256Hash(urlunhashed)
+        
+
+        // API.richCorePayment()
+        // .then(result => {
+        //     console.log(result)
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        //     alert("payment err, please check your Rich Core balance and try again")
+        // })
     }
     
     render() {
@@ -111,7 +131,7 @@ class Cart extends Component {
                                 })}
                             </div>
                             <div id="total">
-                                <span id="subtotal">Total: {this.state.tokenTotal} ClaudeCoins</span>
+                                <span id="subtotal">Total: {this.state.subTotalForDisplay} RichCore</span>
                             </div>
                         </div>
                         <div className="col-lg-6 p-5">
@@ -175,7 +195,7 @@ class Cart extends Component {
                                         name="zipcode"
                                     />
                                     <RichCoreBtn
-                                        disabled={!(this.state.firstName && this.state.lastName && this.state.email)}
+                                        // disabled={!(this.state.firstName && this.state.lastName && this.state.email)}
                                         handleTokenSubmit={this.handleTokenSubmit}
                                     />
                                 </div>

@@ -32,7 +32,8 @@
     "react-dropzone": "^4.2.12",
     "react-input-slider": "^4.0.1",
     "react-router-dom": "^4.3.1",
-    "reactstrap": "^6.3.0"
+    "reactstrap": "^6.3.0",
+    "sha256": "^0.2.0"
   },
   "repository": {
     "type": "git",

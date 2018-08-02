@@ -36,5 +36,8 @@ export default {
     },
     getCourses: () => {
         return axios.get("/api/courses");
+    },
+    hash: (url) => {
+        return axios.post("/api/payment/hash", url)
     }
 }

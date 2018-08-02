@@ -14,5 +14,9 @@ const courseRoutes = require("./courses");
 
 router.use("/courses", courseRoutes);
 
+const paymentRoutes = require("./payment");
+
+router.use("/payment", paymentRoutes);
+
 
 module.exports = router;
