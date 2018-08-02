@@ -7,7 +7,7 @@ class Student extends Component {
     render () {
         return (
             <Container fluid>
-                "This is Login Page"
+                
             </Container>
         )
     }

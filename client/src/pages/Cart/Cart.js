@@ -5,6 +5,7 @@ import CheckoutList from "../../components/CheckoutList"
 import {PlainInput} from "../../components/Form"
 import StateDrop from "../../components/StateDrop"
 import RichCoreBtn from "../../components/RichCoreBtn"
+import API from "../../utils/API"
 
 class Cart extends Component {
     constructor(props) {
@@ -46,6 +47,11 @@ class Cart extends Component {
         });
     }
 
+    sha256Hash = (string) => {
+        //call API and hash in server
+    }
+
+    //initiate richcore payment
     handleTokenSubmit = (event) => {
         event.preventDefault();
         let paymentInfo = {
@@ -59,10 +65,28 @@ class Cart extends Component {
             state: this.state.state,
             province: this.state.province,
         }
+        // console.log("payment", paymentInfo)
 
-        console.log("payment", paymentInfo)
+        let urlunhashed="";
+        this.sha256Hash(urlunhashed)
+        .then(result=>{
+            console.log(result)
+        })
+        .catch(err => {
+            console.log(err)
+            alert("payment err, please check your Rich Core balnce and try again")
+        });
+
+        API.richCorePayment()
+        .then(result => {
+            console.log(result)
+        })
+        .catch(err => {
+            console.log(err)
+            alert("payment err, please check your Rich Core balnce and try again")
+        })
     }
-
+    
     render() {
         // console.log(this.state.state)
         return (

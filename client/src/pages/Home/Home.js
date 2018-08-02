@@ -15,7 +15,7 @@ class Home extends Component {
                 <Row>
                     <Col size="md-12">
                         <Jumbotron>
-                           
+                           This page will not be used for now, please navigate to courses page.
                         </Jumbotron>
                     </Col>
                 </Row>
