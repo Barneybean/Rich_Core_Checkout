@@ -25,7 +25,7 @@ class CourseDetail extends Component {
                             <img id="default" src={courseImage} alt="default" />
                             <hr />
                             <button type="button" className="btn btn-raised btn-danger"
-                            onClick={() => { this.click(courseImage, _id, name, tokenValue, courseCode) }}
+                                onClick={() => { this.click(courseImage, _id, name, tokenValue, courseCode) }}
                             >Add To Cart</button>
                         </div>
                     )}

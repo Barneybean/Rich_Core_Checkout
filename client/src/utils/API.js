@@ -39,5 +39,8 @@ export default {
     },
     hash: (url) => {
         return axios.post("/api/payment/hash", url)
+    },
+    makePayment: (url) => {
+        return axios.post("api/payment/", url)
     }
 }

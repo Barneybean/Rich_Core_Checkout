@@ -1,0 +1,13 @@
+#loginForm {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+#loginTitle {
+    font-size: 40px;
+    font-weight: 600;
+}
+
+#loginBtn {
+    width: 100%;
+}

@@ -14,20 +14,84 @@ import API from "./utils/API"
 
 class App extends Component {
   state = {
-    loginStatus: "Login",
-    loggedInId: "",
+    loginSign: "Admin Login",
+    loggedInId: "loggedOut",
     userType: "",
     courses: [],
     selectedCourseForDetail: [],
     addedToCart: [],
     errorNotice: '',
-    isModalOpen: false
+    isModalOpen: false,
   }
   //react child cannot be obj so has to be arr to hols obj!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! and use map to read arr in child 
 
   componentWillMount() {
     this.loadCourses();
     this.loadCart();
+
+    // let cookieId = this.readCookie("loggedinId")
+    // let userType = this.readCookie("userType")
+    
+    // if (cookieId === "") {
+    //   this.createCookie("loggedinId", "loggedOut", 1)
+    //   window.location.href = "/";
+    // } else {
+    //   // console.log("login id", cookieId)
+    //   this.setState({
+    //     loggedInId: cookieId,
+    //     userType: userType
+    //   })
+    // }
+  }
+
+  // Cookie
+  createCookie = (name, value, days) => {
+    if (days) {
+      let date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      var expires = "; expires=" + date.toGMTString();
+    }
+    else expires = "";
+
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }
+
+  readCookie = a => {
+    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+  }
+
+  eraseCookie = (name) => {
+    this.createCookie(name, "", -1);
+  }
+
+  checkLogIn = (loggedInId) => {
+    // console.log("APP", loggedInId)
+    if (!loggedInId === "") {
+      this.setState({
+        loggedInId: loggedInId
+      })
+    } else {
+      this.setState({
+        loggedInId: ""
+      })
+    }
+  }
+
+  //******************log out */
+  logOut = () => {
+    this.eraseCookie("loggedinId")
+    this.setState({
+      loggedInId: ""
+    })
+    this.redirect()
+  }
+  //##################end logout
+
+  redirect = () => {
+    if (this.state.loggedInId) {
+      window.location.href = "/";
+    }
   }
 
   loadCourses = () => {
@@ -133,16 +197,16 @@ class App extends Component {
     return (
       <div className="App">
         <LogoBanner
-          loginStatus={this.state.loginStatus}
+          loginStatus={this.state.loginSign}
           cartCount={this.state.addedToCart.length}
         />
         <Router>
-          {(this.state.loggedInId === '') ? (
+          {(this.state.loggedInId === 'loggedOut') ? (
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
               <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/login" component={()=>(<Login createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
               <Redirect from="/student" to="/login" />
               <Redirect from="/admin" to="/login" />
               <Route component={NoMatch} />
@@ -154,7 +218,7 @@ class App extends Component {
                   <Route exact path="/admin" component={Admin} />
                   <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
                   <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
-                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/login" component={()=>(<Login createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
                   <Redirect from="/student" to="/login" />
                   <Route component={NoMatch} />
                 </Switch>
@@ -164,7 +228,7 @@ class App extends Component {
                     <Route exact path="/student" component={Student} />
                     <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
                     <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
-                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/login" component={()=>(<Login createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
                     <Redirect from="/admin" to="/login" />
                     <Route component={NoMatch} />
                   </Switch>

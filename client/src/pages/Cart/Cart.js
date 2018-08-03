@@ -52,18 +52,33 @@ class Cart extends Component {
         });
     }
 
-    sha256Hash = (string) => {
+    sha256Hash = (urlunhashed) => {
         //call API and hash in server
-        let urlObj = {url: string}
+        let hashedStr;
+        let urlObj = {url: urlunhashed}
         API.hash(urlObj)
         .then(result=>{
-            console.log(result)
+            // console.log(result.data.hashed)
+            hashedStr = result.data.hashed
+            //add signature to url
+            let finalUrlObj = {finalUrl: urlunhashed + `&${hashedStr}`}
+            console.log(finalUrlObj)
+            //call that API
+            window.open(finalUrlObj.finalUrl)
+            // API.makePayment(finalUrlObj)
+            // .then(result=>{console.log(result)})
+            // .catch(err=>{
+            //     console.log(err)
+            //     alert("Payment API Err.. Coins are not deducted. Please try again.")
+            // })
         })
         .catch(err => {
             console.log(err)
             alert("hash error..")
         });
     }
+
+
 
     //initiate richcore payment
     handleTokenSubmit = (event) => {
@@ -80,23 +95,21 @@ class Cart extends Component {
             state: this.state.state,
             province: this.state.province,
         }
-        const {tokenTotal, firstName, lastName, email, address, city, zipcode, state, province} = paymentInfo
+        const {tokenTotal, firstName, lastName, email} = paymentInfo
         // console.log("payment", paymentInfo)
 
-        let mainStr=`https://www.richcore.com/rich/pay`
-        let amount = `&amount=${tokenTotal}`
-        let comment = `&comment=${firstName}%${lastName}%${email}%${"course%purchase"}`;
+        let mainStr=`https://www.richcore.com/rich/pay/`
+        let amount = `deduct?amount=${tokenTotal}&coin=RCTFF`
+        let comment = `&comment=${firstName}_${lastName}_${email}_Claude_University_Course_Checkout`;
         let merchantkey = `&merchantKey=34b5DF28e68d833E97316671EC192ADd762864e076abB0b6b750189Cccf54330`;
         let notifyUrl = `&http://localhost:3000/`;
-        let refNo = `&00000000001`;
-        let returnUrl = `&http://localhost:3000/courses`
-        let signature = ""
+        let refNo = `&201899997777999999911`;
+        let returnUrl = `&http://localhost:3000/api/payment/success`
         let urlunhashed = mainStr + amount + comment + merchantkey+notifyUrl+refNo+returnUrl
 
         console.log(urlunhashed)
-        this.sha256Hash(urlunhashed)
         
-
+        this.sha256Hash(urlunhashed)
         // API.richCorePayment()
         // .then(result => {
         //     console.log(result)
@@ -109,6 +122,7 @@ class Cart extends Component {
     
     render() {
         // console.log(this.state.state)
+
         return (
             <div id="cartBody">
                 <Container fluid>
