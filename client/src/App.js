@@ -201,7 +201,6 @@ class App extends Component {
     return (
       <div className="App">
         <LogoBanner
-          loginStatus={this.state.loginSign}
           cartCount={this.state.addedToCart.length}
           logOut={this.logOut}
           loggedInId={this.state.loggedInId}

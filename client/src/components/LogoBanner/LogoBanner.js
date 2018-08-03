@@ -23,9 +23,9 @@ const LogoBanner = ({loginStatus, cartCount, logOut, loggedInId}) => (
                         <a href="/login"><div id="loginState">Admin Login</div></a>
                     ):(
                         <div>
-                            <button id="loginState"
+                            <div id="loginState"
                                 onClick={logOut}
-                            >Log out</button>
+                            >Log out</div>
                             <a href="/admin"><div>Admin Portal</div></a>
                         </div>
                     )}

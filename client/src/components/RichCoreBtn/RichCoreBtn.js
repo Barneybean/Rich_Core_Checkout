@@ -1,6 +1,7 @@
 import React from "react"
 import "./RichCoreBtn.css"
 import {FormBtn} from "../Form/FormBtn"
+import RichCore from "../../assets/images/richcorelogo.png"
 
 const RichCoreBtn = ({handleTokenSubmit, disabled}) => (
     <FormBtn
@@ -8,7 +9,7 @@ const RichCoreBtn = ({handleTokenSubmit, disabled}) => (
         disabled = {disabled}
         id="richCoreBtn"
     >
-        <img src="https://res.cloudinary.com/dozulwrpg/image/upload/v1533320532/richcorelogo.png" height="50px" alt="pay with RichCore"/>
+        <img src={RichCore} height="50px" alt="pay with RichCore"/>
     </FormBtn>
 )
 
