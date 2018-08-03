@@ -6,8 +6,9 @@ const RichCoreBtn = ({handleTokenSubmit, disabled}) => (
     <FormBtn
         onClick = {handleTokenSubmit}
         disabled = {disabled}
+        id="richCoreBtn"
     >
-        <img src="../../assets/images/richcorelogo.png" alt="pay with RichCore"/>
+        <img src="https://res.cloudinary.com/dozulwrpg/image/upload/v1533320532/richcorelogo.png" height="50px" alt="pay with RichCore"/>
     </FormBtn>
 )
 

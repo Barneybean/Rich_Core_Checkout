@@ -29,19 +29,22 @@ class App extends Component {
     this.loadCourses();
     this.loadCart();
 
-    // let cookieId = this.readCookie("loggedinId")
-    // let userType = this.readCookie("userType")
+    let cookieId = this.readCookie("loggedinId")
+    let userType = this.readCookie("userType")
     
-    // if (cookieId === "") {
-    //   this.createCookie("loggedinId", "loggedOut", 1)
-    //   window.location.href = "/";
-    // } else {
-    //   // console.log("login id", cookieId)
-    //   this.setState({
-    //     loggedInId: cookieId,
-    //     userType: userType
-    //   })
-    // }
+    if (cookieId === "") {
+      this.createCookie("loggedinId", "loggedOut", 1)
+      this.setState({        
+        loginSign: "Admin Login"
+      })
+    } else {
+      // console.log("login id", cookieId)
+      this.setState({
+        loggedInId: cookieId,
+        userType: userType,
+        loginSign: "Log Out"
+      })
+    }
   }
 
   // Cookie
@@ -82,7 +85,8 @@ class App extends Component {
   logOut = () => {
     this.eraseCookie("loggedinId")
     this.setState({
-      loggedInId: ""
+      loggedInId: "",
+      loginStatus: "Admin Login"
     })
     this.redirect()
   }
@@ -199,6 +203,8 @@ class App extends Component {
         <LogoBanner
           loginStatus={this.state.loginSign}
           cartCount={this.state.addedToCart.length}
+          logOut={this.logOut}
+          loggedInId={this.state.loggedInId}
         />
         <Router>
           {(this.state.loggedInId === 'loggedOut') ? (

@@ -7,7 +7,7 @@ class Admin extends Component {
     render () {
         return (
             <Container fluid>
-                "This is Admin Page"
+                
             </Container>
         )
     }

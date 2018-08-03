@@ -5,7 +5,7 @@ import Nav from "../Nav"
 import CartIcon from "../CartIcon"
 
 
-const LogoBanner = ({loginStatus, cartCount}) => (
+const LogoBanner = ({loginStatus, cartCount, logOut, loggedInId}) => (
     // <div className="sticky-top">
     <div className="bg">
         <div id="logo" className="pt-0 mx-0 bg-white">
@@ -19,7 +19,16 @@ const LogoBanner = ({loginStatus, cartCount}) => (
                     />
                 </div>
                 <div className="col-md-2">
-                    <a href="/login"><div id="loginState">{loginStatus}</div></a>
+                    {loggedInId === "loggedOut" ? (
+                        <a href="/login"><div id="loginState">Admin Login</div></a>
+                    ):(
+                        <div>
+                            <button id="loginState"
+                                onClick={logOut}
+                            >Log out</button>
+                            <a href="/admin"><div>Admin Portal</div></a>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="row">

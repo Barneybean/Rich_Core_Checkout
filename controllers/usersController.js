@@ -82,14 +82,20 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByEmailLocalLogin: function(req, res) {
+    console.log(req.body)
     db.Users
     .findOne({email: req.body.email})
       .then(
         dbModel => {
+          console.log("90", dbModel)
           //hash compare use sync otherwise res in unsync compare is true or false cant sent to front end
+          console.log("cb")
           let auth = bcrypt.compareSync(req.body.password, dbModel.password); 
-          // console.log("cb",auth)
-          res.json({message: auth , _id: dbModel._id, userType: dbModel.userType})
+          if (auth) {
+            res.json({message: "success" , _id: dbModel._id, userType: dbModel.userType})
+          } else {
+            res.json({message: "Login Failed"})
+          }
         })
       .catch(err => res.json(err));
   },

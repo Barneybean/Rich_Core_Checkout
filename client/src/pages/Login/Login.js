@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import "./Login.css";
 import { Container } from "../../components/Grid";
+import API from "../../utils/API"
 
 class Login extends Component {
 
@@ -10,7 +11,6 @@ class Login extends Component {
         this.state = {
             logInEmail: "",
             logInPassword: "",
-            loggedInId: "",
             notice: ""
         }
     }
@@ -19,8 +19,7 @@ class Login extends Component {
         this.setState({
             logInEmail: "",
             logInPassword: "",
-            signUpEmail: "",
-            signUpPassword: "",
+            notice: ""
         })
     }
 
@@ -33,8 +32,31 @@ class Login extends Component {
     }
 
     handleLogin = (event) => {
-        event.preventDefault();
+        event.preventDefault(); 
+        this.setState({
+            notice: ""
+        })
+        let userInfo =  {
+            email: this.state.logInEmail,
+            password: this.state.logInPassword
+        }
 
+        API.localLogIn(userInfo)
+        .then(result=>{
+            console.log(result)
+            if (result.data.message === "success") {
+                this.props.createCookie("loggedinId", result.data._id)
+                this.props.createCookie("userType", result.data.userType)
+                window.location.href="/admin"
+            } else {
+                this.setState({notice: "Email or password do not match, please try again.."})
+            }
+        }).catch(err=>{
+            // console.log(err)
+            this.setState({
+                notice: `Server Error, please contact Admin.. Err code: ${err.status}`
+            })
+        })
     }
 
     render () {
@@ -57,13 +79,17 @@ class Login extends Component {
                                 type="email" 
                                 className="form-control" 
                                 type="password"
-                                name="logInPsw"
+                                name="logInPassword"
                                 value={this.state.loginPsw}
                                 onChange={this.handleInputChange}                            
                             />
                         </div>
                         <div>{this.state.notice}</div>
-                        <button id="loginBtn" type="button" className="btn btn-raised btn-success"
+                        <button 
+                            id="loginBtn" 
+                            type="button" 
+                            className="btn btn-raised btn-success"
+                            disabled={!(this.state.logInEmail || this.state.logInPassword)}
                             onClick={this.handleLogin}
                         > Log In </button>
                     </form>
