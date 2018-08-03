@@ -5,7 +5,7 @@ import Nav from "../Nav"
 import CartIcon from "../CartIcon"
 
 
-const LogoBanner = ({loginStatus, cartCount, logOut, loggedInId}) => (
+const LogoBanner = ({cartCount, logOut, loggedInId}) => (
     // <div className="sticky-top">
     <div className="bg">
         <div id="logo" className="pt-0 mx-0 bg-white">

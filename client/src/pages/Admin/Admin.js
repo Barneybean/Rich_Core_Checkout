@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import "./Admin.css";
-import { Container } from "../../components/Grid";
 
 class Admin extends Component {
 
@@ -8,15 +7,29 @@ class Admin extends Component {
     
     render () {
         return (
-            <Container fluid>
+            <div className=" admin">
                 <div className="row">
-                    <div className="col-lg-2 VerticalNav">
-                        <a href=""><h5>Courses</h5></a>
-                        <a href=""><h5>Orders</h5></a>
-                        <a href=""><h5>Setting</h5></a>
+                    <div className="col-lg-2 verticalNav">
+                        <div id="navLink">
+                            <a href="#courses" className="navItem"><h6>Courses</h6></a>
+                            <a href="#orders" className="navItem"><h6>Orders</h6></a>
+                            <a href="#profile" className="navItem"><h6>Setting</h6></a>
+                        </div> 
+                    </div>
+                    <div className="col-lg-10 adminBody">
+                        <section id="courses">
+                            1
+                        </section>
+                        <section id="orders">
+                            2
+                        </section>
+                        <section id="profile">
+                            3
+                        </section>
                     </div>
                 </div>
-            </Container>
+            </div>
+            
         )
     }
 }

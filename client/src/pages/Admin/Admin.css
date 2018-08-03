@@ -1,0 +1,48 @@
+.admin {
+    margin: 0 !important;
+    height: 800px;
+    overflow: auto;
+    width: 100% !important;
+}
+
+.verticalNav {
+    background-color: rgb(191, 172, 243);
+    padding: 3rem 0;
+    color: rgb(50, 50, 173);
+    min-height: 600px;
+    width: 100%;
+}
+
+#navLink {
+    outline: none;
+    position: fixed;
+    left: 3vw;
+}
+
+.navCol {
+    padding-left: 0;
+}
+
+.navItem {
+    text-align: center !important; 
+}
+
+.adminBody {
+    padding: 0 !important;
+}
+
+section {
+    min-height: 600px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (max-width: 991px) {
+    #navLink {
+        position: relative;
+    }
+    .verticalNav {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
