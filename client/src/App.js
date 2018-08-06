@@ -127,7 +127,7 @@ class App extends Component {
 
   addToCart = (courseImage, _id, name, tokenValue, courseCode) => {
     //if logged in then write to db, else write into local storage
-    if (this.state.loggedInId === "") {
+    // if (this.state.loggedInId === "loggedOut") {
       console.log("added to Cart", name)
       let addCourse = {
         courseImage, _id, name, tokenValue, courseCode
@@ -150,9 +150,9 @@ class App extends Component {
       let cartItems = JSON.stringify(cartArr);
       this.writeToLocalStorage("cartItems", cartItems);
       // alert("New Item Added")
-    } else {
+    // } else {
       // write in to db associate with logged in id
-    }
+    // }
   }
 
   openModal = () => {

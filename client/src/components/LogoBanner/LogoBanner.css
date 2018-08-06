@@ -10,6 +10,8 @@ a {
 
 .logo {
     padding-left: 40px;
+    height: 80px;
+    /* margin-left: 5px; */
 }
 
 #loginState {
@@ -30,3 +32,5 @@ a {
         width: 350px;
     }
 }
+
+

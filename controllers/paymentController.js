@@ -1,13 +1,13 @@
 const db = require("../models");
-const sha256 = require("sha256");
 const axios = require('axios');
+var CryptoJS = require("crypto-js");
 
 // Defining methods for the coursesController.
 module.exports = {
   hash: (req, res) => {
     // console.log("hash Controller", req.body)
-    let hashedUrl = sha256(req.body.url)
-    console.log(hashedUrl)
+    let hashedUrl = CryptoJS.HmacSHA256(req.body.url, "E617f9Cc1986Fd57f672FC5EFd42d3DaB4eE6493d8D40C3CDdDC826fB192Ed06").toString(CryptoJS.enc.Hex)
+    // console.log("hashedUrl controller", hashedUrl)
     res.json({hashed: hashedUrl})
   },
   makePayment: (req, res) => {
