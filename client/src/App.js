@@ -220,7 +220,7 @@ class App extends Component {
               this.state.userType === "admin" ? (
                 <Switch>
                   <Route exact path="/" component={Home} />
-                  <Route exact path="/admin" component={Admin} />
+                  <Route exact path="/admin" component={()=> (<Admin readCookie={this.readCookie} courses={this.state.courses}/>)} />
                   <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
                   <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
                   <Route exact path="/login" component={()=>(<Login createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />

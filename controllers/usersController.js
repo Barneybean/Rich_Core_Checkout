@@ -33,11 +33,9 @@ module.exports = {
   findById: function (req, res) {
     db.Users
       .findOne({_id: req.params.id})
-      .populate("note")
-      .populate("reservations")
-      .populate("record")
       .then(dbModel => {
-        res.json(dbModel)
+        // console.log(dbModel.email)
+        res.json({email: dbModel.email})
       })
       .catch(err => res.status(422).json(err));
   },
@@ -82,14 +80,14 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByEmailLocalLogin: function(req, res) {
-    console.log(req.body)
+    // console.log(req.body)
     db.Users
     .findOne({email: req.body.email})
       .then(
         dbModel => {
           console.log("90", dbModel)
           //hash compare use sync otherwise res in unsync compare is true or false cant sent to front end
-          console.log("cb")
+          // console.log("cb")
           let auth = bcrypt.compareSync(req.body.password, dbModel.password); 
           if (auth) {
             res.json({message: "success" , _id: dbModel._id, userType: dbModel.userType})
@@ -120,10 +118,17 @@ module.exports = {
       }).catch(err => res.status(422).json(err));
   },
   update: function (req, res) {
-    db.Users
+    // console.log(req.body.password)
+    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+      req.body.password = hash;
+      // console.log(req.body.password) 
+      db.Users
       .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        res.json({message: "Password updated!"})
+      })
       .catch(err => res.status(422).json(err));
+    })
   },
   updateGoogle: function (req, res) {
     db.google_account
