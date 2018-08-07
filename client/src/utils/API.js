@@ -1,4 +1,5 @@
 import axios from "axios";
+import AdminCourseList from "../components/AdminCourseList/AdminCourseList";
 
 export default {
 
@@ -26,7 +27,7 @@ export default {
         return axios.get("/api/user/google/type/" + id );
     },
     createPhoto: (data) => {
-        return axios.post("/api/user/photo",  data);
+        return axios.post("/api/courses/photo",  data);
     },
     updateById: (id, object) => {
         return axios.post("/api/user/post/" + id, object);
@@ -45,5 +46,8 @@ export default {
     },
     deleteAdminCourse: (id) => {
         return axios.delete("api/courses/"+id)
+    },
+    addCourse: (course) => {
+        return axios.post("api/courses/", course)
     }
 }

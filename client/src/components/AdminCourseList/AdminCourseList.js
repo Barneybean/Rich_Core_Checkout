@@ -12,7 +12,7 @@ const AdminCourseList = ({editing, courseCode, courseImage, name, tokenValue, co
                     <ul>
                         <li><strong>Course Name:</strong> {name}</li>
                         <li><strong>Course Code:</strong> {courseCode}</li>
-                        <li><strong>Course Token</strong> Value: {tokenValue}</li>
+                        <li><strong>Course Token Value:</strong> {tokenValue}</li>
                         <li id="courseDetail"><strong>Course Detail:</strong> {courseDetail}</li>
                     </ul>
                     <DelBtn 

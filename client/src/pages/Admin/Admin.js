@@ -4,7 +4,7 @@ import Profile from "../../components/Profile"
 import API from "../../utils/API"
 import { Row, Col, Container } from "../../components/Grid";
 import AdminCourseList from "../../components/AdminCourseList/AdminCourseList";
-import Photo from "../../components/Photo"
+import AddCourse from "../../components/AddCourse"
 
 class Admin extends Component {
 
@@ -121,7 +121,9 @@ class Admin extends Component {
                                         })}
                                     </Col>
                                     <Col size="5">
-                                        <Photo DimageUrl={this.state.imageLink}/>
+                                        <AddCourse
+                                            loadCourses={this.props.loadCourses}
+                                        />
                                     </Col>
                                 </Row>
                             </Container>
