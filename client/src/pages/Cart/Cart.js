@@ -59,19 +59,14 @@ class Cart extends Component {
         API.hash(urlObj)
         .then(result=>{
             // console.log(result.data.hashed)
-            let mainStr=`https://www.richcore.com/rich/pay/`
+            let mainStr=`https://www.richcore.com/rich/pay/deduct?`
             hashedStr = result.data.hashed
             //add signature to url
             let finalUrlObj = {finalUrl: mainStr + urlunhashed + `&signature=${hashedStr}`}
             console.log(finalUrlObj)
             //call that API
             window.open(finalUrlObj.finalUrl)
-            // API.makePayment(finalUrlObj)
-            // .then(result=>{console.log(result)})
-            // .catch(err=>{
-            //     console.log(err)
-            //     alert("Payment API Err.. Coins are not deducted. Please try again.")
-            // })
+            
         })
         .catch(err => {
             console.log(err)
@@ -99,34 +94,17 @@ class Cart extends Component {
         const {tokenTotal, firstName, lastName, email} = paymentInfo
         // console.log("payment", paymentInfo)
 
-        let amount = `deduct?amount=${tokenTotal}&coin=RCTFF`
+        let amount = `amount=${tokenTotal}&coin=RCTFF`
         let comment = `&comment=${firstName}_${lastName}_${email}_Claude_University_Course_Checkout`;
         let merchantkey = `&merchantKey=51003cbA1094Ae1CC8fD7947526E1f79Dc0D9b90F07F1e315ec92600705BE225`;
-        let notifyUrl = `&notifyUrl=http://localhost:3000/`;
+        let notifyUrl = `&notifyUrl=http://localhost:3000/api/payment/success`;
         let refNo = `&refNo=201899997777999999911`;
-        let returnUrl = `&returnUrl=http://localhost:3000/api/payment/success`
+        let returnUrl = `&returnUrl=http://localhost:3000/`
         let urlunhashed = amount + comment + merchantkey+notifyUrl+refNo+returnUrl
 
-        // let amount = `deduct?amount=100.0001`
-        // let coin = `&coin=RCTFF`
-        // let comment = `&comment=柯道云软件服务 ViP`;
-        // let merchantkey = `&merchantKey=34b5DF28e68d833E97316671EC192ADd762864e076abB0b6b750189Cccf54330`;
-        // let notifyUrl = `&notifyUrl=http://127.0.0.1:9003`;
-        // let refNo = `&refNo=201899997777999999911`;
-        // let returnUrl = `&returnUrl=http://127.0.0.1:9003`
-        // let urlunhashed = amount + coin + comment + merchantkey+notifyUrl+refNo+returnUrl
-
-        console.log(urlunhashed)
+        // console.log(urlunhashed)
         
         this.sha256Hash(urlunhashed)
-        // API.richCorePayment()
-        // .then(result => {
-        //     console.log(result)
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        //     alert("payment err, please check your Rich Core balance and try again")
-        // })
     }
     
     render() {

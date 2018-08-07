@@ -60,15 +60,15 @@ class Courses extends Component {
                 <Row> 
                     {this.state.errorNotice ? (<Alert notice={this.state.errorNotice}/>):(null)}
                     <Col size="lg-6">
-                        {this.props.courses.map((item, i)=>{
-                            return (
-                                <CourseListItem
-                                    key = {i}
-                                    course={item}
-                                    getDetail = {this.props.viewCourseDetail}
-                                />
-                            )
-                        })}
+                            {this.props.courses.map((item, i)=>{
+                                return (
+                                    <CourseListItem
+                                        key = {i}
+                                        course={item}
+                                        getDetail = {this.props.viewCourseDetail}
+                                    />
+                                )
+                            })}
                     </Col>
                     <div className="col-lg-6" id="detailContainer">
                         {this.props.selectedCourseForDetail.map((item, i) => {
@@ -87,6 +87,7 @@ class Courses extends Component {
                                 />
                             )
                         })}
+                        
                     </div>
                 </Row>
             </Container>

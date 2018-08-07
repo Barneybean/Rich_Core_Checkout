@@ -23,7 +23,7 @@ class NavBar extends React.Component {
       <div className="navbar">
         <ul className="nav">
           <li className="nav-item">
-            <a className="nav-link" href="/" hidefocus="hidefocus">Home</a>
+            <a className="nav-link" href="/home" hidefocus="hidefocus">Home</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="about Us" hidefocus="hidefocus">About Us</a>
@@ -32,7 +32,7 @@ class NavBar extends React.Component {
             <a className="nav-link" href="programs" hidefocus="hidefocus">Programs</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="courses" hidefocus="hidefocus">Courses</a>
+            <a className="nav-link" href="/" hidefocus="hidefocus">Courses</a>
           </li>
           <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle nav caret>

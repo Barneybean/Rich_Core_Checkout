@@ -15,9 +15,9 @@ const AdminCourseList = ({editing, courseCode, courseImage, name, tokenValue, co
                         <li><strong>Course Token</strong> Value: {tokenValue}</li>
                         <li id="courseDetail"><strong>Course Detail:</strong> {courseDetail}</li>
                     </ul>
-                <DelBtn 
-                    onClick={()=>{deleteCourse(_id)}}
-                />
+                    <DelBtn 
+                        onClick={()=>{deleteCourse(_id)}}
+                    />
                 </div>
             </div>
         ) : (

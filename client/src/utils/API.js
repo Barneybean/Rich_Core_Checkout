@@ -42,5 +42,8 @@ export default {
     },
     makePayment: (url) => {
         return axios.post("api/payment/", url)
+    },
+    deleteAdminCourse: (id) => {
+        return axios.delete("api/courses/"+id)
     }
 }

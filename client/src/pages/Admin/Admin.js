@@ -44,7 +44,7 @@ class Admin extends Component {
 
     getUser(id) {
         API.searchById(id).then((results) => {
-            console.log(results)
+            // console.log(results)
             this.setState({
                 email: results.data.email,
                 password: results.data.password
@@ -67,12 +67,21 @@ class Admin extends Component {
                     })
                 }).catch(err => alert("error, please try again or contact developer"))
         ) : (
-                alert("passeord cannot be empty")
+                alert("password cannot be empty")
             )
     }
 
     deleteCourse = (id) => {
         console.log("delete in admin", id)
+        API.deleteAdminCourse(id)
+        .then(result=>{
+            console.log(result)
+            this.props.loadCourses();
+            this.props.deleteItemInCart(id)
+        }).catch(err=>{
+            console.log(err)
+            alert("err")
+        })
     }
 
     render() {
