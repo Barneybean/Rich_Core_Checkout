@@ -11,11 +11,11 @@ mongoose.connect(
 const usersSeed = 
   [
     {
-    userType: "admin",
+    userType: "student",
     firstName: "Jane",
     lastName: "Doe",
     email: "jane@gmail.com",
-    password: "2b$10$LFPVwvhAdMDX70xZfQGkSOUln50DCkb8x1C//yr/pXGiacCOms43.",
+    password: "$2a$04$Sr4OTcuTDWuqE8Aq3kBaGeAM6GKvvx6gMjrSOCikh1LQtfOzh2due",
     imageUrl: " ",
     phone: " ",
     birth_date: " ",
@@ -27,11 +27,11 @@ const usersSeed =
     richCorePayments:[]
   },
   {
-    userType: "student",
+    userType: "admin",
     firstName: "william",
     lastName: "Gao",
     email: "william@gmail.com",
-    password: "2b$10$LFPVwvhAdMDX70xZfQGkSOUln50DCkb8x1C//yr/pXGiacCOms43.",
+    password: "$2a$04$gFzpag.y4sXnlxwmaXBHYukKwX22e7uvfCKvVnY7njMCxC1XBc8v2",
     imageUrl: " ",
     phone: " ",
     birth_date: " ",

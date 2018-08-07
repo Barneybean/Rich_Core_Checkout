@@ -4,6 +4,7 @@ import Profile from "../../components/Profile"
 import API from "../../utils/API"
 import { Row, Col, Container } from "../../components/Grid";
 import AdminCourseList from "../../components/AdminCourseList/AdminCourseList";
+import Photo from "../../components/Photo"
 
 class Admin extends Component {
 
@@ -15,6 +16,7 @@ class Admin extends Component {
             password: "",
             loggedinId: "",
             profileNotice: "No action since logged in",
+            imageLink: "",
             editing: false,
             AdminCourseEdit: false
         }
@@ -119,7 +121,7 @@ class Admin extends Component {
                                         })}
                                     </Col>
                                     <Col size="5">
-                                        Add Course
+                                        <Photo DimageUrl={this.state.imageLink}/>
                                     </Col>
                                 </Row>
                             </Container>

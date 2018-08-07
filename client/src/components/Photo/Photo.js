@@ -4,8 +4,8 @@ import request from 'superagent';
 import './Photo.css';
 import API from "../../utils/API";
 
-const CLOUDINARY_UPLOAD_PRESET = 'j0thsnot';
-const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/putincake/image/upload";
+const CLOUDINARY_UPLOAD_PRESET = 'claudeU';
+const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/dozulwrpg/image/upload";
 
 class Photo extends React.Component {
   constructor(props) {
@@ -14,22 +14,9 @@ class Photo extends React.Component {
     this.state = {
       uploadedFile: null,
       uploadedFileCloudinaryUrl: "",
-      loginId:'',
       notice: "Profile Image",
       callBackImageLink: ''
     };
-  }
-
-  componentDidMount() {
-    let cookieId = this.readCookie("loggedinId")
-    this.setState({
-        loginId: cookieId,
-    })
-  }
-
-  readCookie = a => {
-    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
-    return b ? b.pop() : '';
   }
 
   onImageDrop(files) {
@@ -42,41 +29,40 @@ class Photo extends React.Component {
   }
 
   handleImageUpload(file) {
-      let upload = request.post(CLOUDINARY_UPLOAD_URL)
-        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-        .field('file', file);
+    console.log(file)
+    let upload = request.post(CLOUDINARY_UPLOAD_URL)
+      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+      .field('file', file);
 
-      upload.end((err, response) => {
-        if (err) {
-          console.error(err);
-        }
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+      if (response.body.secure_url !== '') {
         
-          if (response.body.secure_url !== '') {
-           
+        this.setState({
+          uploadedFileCloudinaryUrl: response.body.secure_url,
+        });
+        
+        let newPhoto = {
+          id: this.state.loginId, url: this.state.uploadedFileCloudinaryUrl
+        }
+        API.createPhoto(newPhoto)
+        .then((result) => {
+          console.log(result);
+          if (result.data) {
             this.setState({
-              uploadedFileCloudinaryUrl: response.body.secure_url,
-            });
-            
-            let newPhoto = {
-              id: this.state.loginId, url: this.state.uploadedFileCloudinaryUrl
-            }
-            API.createPhoto(newPhoto)
-            .then((result) => {
-              console.log(result);
-              if (result.data) {
-                this.setState({
-                  notice: "image upload success"
-                })
-              } else {
-                this.setState({
-                  notice: "image upload failed, please try again with an image with smaller file size.."
-                })
-              }
-              this.setState({callBackImageLink: result});
-
+              notice: "image upload success"
+            })
+          } else {
+            this.setState({
+              notice: "image upload failed, please try again with an image with smaller file size.."
             })
           }
+          this.setState({callBackImageLink: result});
         })
+      }
+    })
   }
 
   render() {
@@ -86,7 +72,8 @@ class Photo extends React.Component {
           <Dropzone
             onDrop={this.onImageDrop.bind(this)}
             multiple={false}
-            accept="image/*">
+            accept="image/*"
+          >
             <div>
               {this.state.uploadedFileCloudinaryUrl === '' ? (
                 <div>
@@ -101,14 +88,6 @@ class Photo extends React.Component {
             </div>
           </Dropzone>
         </div>
-
-        {/* <div>
-          {this.state.uploadedFileCloudinaryUrl === '' ? null :
-          <div>
-            <p>{this.state.uploadedFile.name}</p>
-            <img src={this.state.uploadedFileCloudinaryUrl} />
-          </div>}
-        </div> */}
       </form>
     )
   }
