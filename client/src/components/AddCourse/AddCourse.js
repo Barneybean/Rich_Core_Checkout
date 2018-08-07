@@ -152,7 +152,7 @@ class Photo extends React.Component {
             disabled={!(this.state.name && this.state.courseCode && this.state.tokenValue && this.state.courseDetail && this.state.callBackImageLink)}
             onClick={this.handleAddCourse}
           >Add</FormBtn>
-          <br/>
+          <br/><br/>
           <p id="addNotice">{this.state.notice}</p>
         </div>
       </form>

@@ -13,22 +13,22 @@ class Courses extends Component {
         super(props)
         this.state = {
             errorNotice: props.errorNotice,
-            isObjDisplayed: "d-none",
+            height: ""
         }
     }
     //to hide Objective on scroll down
-    componentDidMount() {
-    window.addEventListener('scroll', this.hideObjective);
-    }
+    // componentDidMount() {
+    //     window.addEventListener('scroll', this.hideObjective);
+    // }
 
-    hideObjective = ()=> {
-        if (window.scrollY >10) {
-            this.setState({isObjDisplayed: ""});
-        }
-        else if (window.scrollY <= 10) {
-            this.setState({isObjDisplayed: "d-none"});
-        }
-    }
+    // hideObjective = ()=> {
+    //     console.log(window.scrollY)
+        
+    //     if (window.scrollY < 400) {
+    //         this.setState({height: window.scrollY})
+    //     }
+        
+    // }
     
     render () {
         // console.log(this.props.courses)
@@ -39,7 +39,7 @@ class Courses extends Component {
             <Container fluid>
                 <Row fluid> 
                     <Objective
-                        display={this.state.isObjDisplayed}
+                        // height={this.state.height}
                     />
                 </Row>
                 <hr/>
