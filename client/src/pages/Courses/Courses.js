@@ -34,7 +34,7 @@ class Courses extends Component {
         // console.log(this.props.courses)
         // const item = this.props.selectedCourseForDetail
         // console.log(item)
-        console.log(this.props.isModalOpen)
+        // console.log(this.props.isModalOpen)
         return (
             <Container fluid>
                 <Row fluid> 

@@ -4,7 +4,7 @@ const keys = require("../config/keys");
 // Defining methods for the coursesController.
 module.exports = {
   getKeys: (req, res) => {
-    console.log(keys.richCore.merchantKey)
+    // console.log(keys.richCore.merchantKey)
     let merchantKey = {
       merchantKey: keys.richCore.merchantKey
     } 
@@ -12,9 +12,9 @@ module.exports = {
   },
   hash: (req, res) => {
     // console.log("hash Controller", req.body)
-    console.log(keys.richCore.privateKey)
+    // console.log(keys.richCore.privateKey)
     let hashedUrl = CryptoJS.HmacSHA256(req.body.url, keys.richCore.privateKey).toString(CryptoJS.enc.Hex)
-    // console.log("hashedUrl controller", hashedUrl)
+    console.log("hashedUrl controller", hashedUrl)
     res.json({hashed: hashedUrl})
   },
   makePayment: (req, res) => {

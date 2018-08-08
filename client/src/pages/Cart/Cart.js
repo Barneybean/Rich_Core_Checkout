@@ -63,7 +63,7 @@ class Cart extends Component {
             hashedStr = result.data.hashed
             //add signature to url
             let finalUrlObj = {finalUrl: mainStr + urlunhashed + `&signature=${hashedStr}`}
-            // console.log(finalUrlObj)
+            console.log(finalUrlObj)
             //call that API
             window.open(finalUrlObj.finalUrl)
             
@@ -94,10 +94,10 @@ class Cart extends Component {
 
         API.getKey()
         .then(result=>{
-            // console.log(result)
-            let amount = `amount=${tokenTotal}&coin=RCTFF`
+            // console.log(result.data.merchantKey)
+            let amount = `amount=${tokenTotal}&coin=RICHT`
             let comment = `&comment=${firstName}_${lastName}_${email}_Claude_University_Course_Checkout`;
-            let merchantkey = `&merchantKey=${result.data.merchantkey}`;
+            let merchantkey = `&merchantKey=${result.data.merchantKey}`;
             let notifyUrl = `&notifyUrl=http://localhost:3000/api/payment/success`;
             let refNo = `&refNo=201899997777999999911`;
             let returnUrl = `&returnUrl=http://localhost:3000/`
@@ -114,7 +114,6 @@ class Cart extends Component {
     
     render() {
         // console.log(this.state.state)
-
         return (
             <div id="cartBody">
                 <Container fluid>
