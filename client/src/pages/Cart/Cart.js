@@ -29,7 +29,7 @@ class Cart extends Component {
     }
 
     sumToken = () => {
-        console.log(this.props.addedToCart)
+        // console.log(this.props.addedToCart)
         let tokens = 0;
         this.props.addedToCart.map((item) => {
             return tokens += item.tokenValue
@@ -63,7 +63,7 @@ class Cart extends Component {
             hashedStr = result.data.hashed
             //add signature to url
             let finalUrlObj = {finalUrl: mainStr + urlunhashed + `&signature=${hashedStr}`}
-            console.log(finalUrlObj)
+            // console.log(finalUrlObj)
             //call that API
             window.open(finalUrlObj.finalUrl)
             
@@ -94,7 +94,7 @@ class Cart extends Component {
 
         API.getKey()
         .then(result=>{
-            console.log(result)
+            // console.log(result)
             let amount = `amount=${tokenTotal}&coin=RCTFF`
             let comment = `&comment=${firstName}_${lastName}_${email}_Claude_University_Course_Checkout`;
             let merchantkey = `&merchantKey=${result.data.merchantkey}`;
