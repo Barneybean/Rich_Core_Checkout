@@ -14,7 +14,7 @@ module.exports = {
     // console.log("hash Controller", req.body)
     // console.log(keys.richCore.privateKey)
     let hashedUrl = CryptoJS.HmacSHA256(req.body.url, keys.richCore.privateKey).toString(CryptoJS.enc.Hex)
-    console.log("hashedUrl controller", hashedUrl)
+    // console.log("hashedUrl controller", hashedUrl)
     res.json({hashed: hashedUrl})
   },
   makePayment: (req, res) => {
@@ -28,6 +28,13 @@ module.exports = {
       });
   },
   paymentFB: (req, res) => {
-    console.log(req )
+    console.log("notifyUrl", req.params)
+    console.log("notifyUrl",req.body)
+    res.send({"message": "notifyUrl"})
+  },
+  handleReturnUrl: (req, res) => {
+    console.log("returnUrl", req.body)    
+    console.log("returnUrl", req.params.status)    
+    res.json({"message": "returnUrl"})
   }
 };

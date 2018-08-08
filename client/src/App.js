@@ -8,6 +8,7 @@ import Student from "./pages/Student"
 import Courses from "./pages/Courses"
 import Cart from "./pages/Cart"
 import NoMatch from "./pages/NoMatch";
+import Pending from "./pages/Pending"
 import Footer from "./components/Footer"
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import API from "./utils/API"
@@ -212,6 +213,7 @@ class App extends Component {
               <Route exact path="/" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
               <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
               <Route exact path="/login" component={()=>(<Login createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
+              <Route exact path="/api/payment/success/:anything" component={Pending} />
               <Redirect from="/student" to="/login" />
               <Redirect from="/admin" to="/login" />
               <Route component={NoMatch} />
@@ -224,6 +226,7 @@ class App extends Component {
                   <Route exact path="/" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
                   <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
                   <Route exact path="/login" component={()=>(<Login createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
+                  <Route exact path="/api/payment/success/:anything" component={Pending} />
                   <Redirect from="/student" to="/login" />
                   <Route component={NoMatch} />
                 </Switch>
@@ -234,6 +237,7 @@ class App extends Component {
                     <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
                     <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
                     <Route exact path="/login" component={()=>(<Login createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
+                    <Route exact path="/api/payment/success/:anything" component={Pending} />
                     <Redirect from="/admin" to="/login" />
                     <Route component={NoMatch} />
                   </Switch>

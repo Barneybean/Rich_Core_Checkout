@@ -8,7 +8,8 @@ router.route("/")
   .post(paymentController.makePayment)
   .get(paymentController.getKeys);
 
-router.route("/success")
-  .post(paymentController.paymentFB);
+router.route("/success/:status")
+  .post(paymentController.paymentFB)
+  .get(paymentController.handleReturnUrl);
 
 module.exports = router;

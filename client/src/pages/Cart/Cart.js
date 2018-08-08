@@ -63,7 +63,7 @@ class Cart extends Component {
             hashedStr = result.data.hashed
             //add signature to url
             let finalUrlObj = {finalUrl: mainStr + urlunhashed + `&signature=${hashedStr}`}
-            console.log(finalUrlObj)
+            // console.log(finalUrlObj)
             //call that API
             window.open(finalUrlObj.finalUrl)
             
@@ -95,14 +95,15 @@ class Cart extends Component {
         API.getKey()
         .then(result=>{
             // console.log(result.data.merchantKey)
-            let amount = `amount=${tokenTotal}&coin=RICHT`
+            // let amount = `amount=${tokenTotal}&coin=RICHT`
+            let amount = `amount=${tokenTotal}&coin=RCTFF`
             let comment = `&comment=${firstName}_${lastName}_${email}_Claude_University_Course_Checkout`;
             let merchantkey = `&merchantKey=${result.data.merchantKey}`;
             // let notifyUrl = `&notifyUrl=acucheckout.herokuapp.com/api/payment/success`;
-            let notifyUrl = `&notifyUrl=http://localhost:3000/api/payment/success`;
-            let refNo = `&refNo=201899997777999999911`;
+            let notifyUrl = `&notifyUrl=http://http://localhost:3002/api/payment/success/`;
+            let refNo = `&refNo=000000020180808000001`;
             // let returnUrl = `&returnUrl=http://acucheckout.herokuapp.com/`
-            let returnUrl = `&returnUrl=http://localhost:3000/`
+            let returnUrl = `&returnUrl=http://http://localhost:3002/api/payment/success/`
             let urlunhashed = amount + comment + merchantkey+notifyUrl+refNo+returnUrl
 
             // console.log(urlunhashed)
