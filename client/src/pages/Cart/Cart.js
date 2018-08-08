@@ -98,9 +98,11 @@ class Cart extends Component {
             let amount = `amount=${tokenTotal}&coin=RICHT`
             let comment = `&comment=${firstName}_${lastName}_${email}_Claude_University_Course_Checkout`;
             let merchantkey = `&merchantKey=${result.data.merchantKey}`;
-            let notifyUrl = `&notifyUrl=http://localhost:3000/api/payment/success`;
+            let notifyUrl = `&notifyUrl=acucheckout.herokuapp.com/api/payment/success`;
+            // let notifyUrl = `&notifyUrl=http://localhost:3000/api/payment/success`;
             let refNo = `&refNo=201899997777999999911`;
-            let returnUrl = `&returnUrl=http://localhost:3000/`
+            let returnUrl = `&returnUrl=http://acucheckout.herokuapp.com/`
+            // let returnUrl = `&returnUrl=http://localhost:3000/`
             let urlunhashed = amount + comment + merchantkey+notifyUrl+refNo+returnUrl
 
             // console.log(urlunhashed)
