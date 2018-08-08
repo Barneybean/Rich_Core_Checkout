@@ -89,7 +89,7 @@ class Admin extends Component {
     render() {
         return (
             <div className=" admin">
-                <div className="row">
+                <div className="row"> 
                     <div className="col-lg-2 verticalNav">
                         <div id="navLink">
                             <a href="#courses" className="navItem"><h6>Courses</h6></a>

@@ -76,7 +76,6 @@ class Login extends Component {
                             />
                             <br/>
                             <input 
-                                type="email" 
                                 className="form-control" 
                                 type="password"
                                 name="logInPassword"

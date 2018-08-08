@@ -74,8 +74,6 @@ class Cart extends Component {
         });
     }
 
-
-
     //initiate richcore payment
     handleTokenSubmit = (event) => {
         event.preventDefault();
@@ -94,17 +92,24 @@ class Cart extends Component {
         const {tokenTotal, firstName, lastName, email} = paymentInfo
         // console.log("payment", paymentInfo)
 
-        let amount = `amount=${tokenTotal}&coin=RCTFF`
-        let comment = `&comment=${firstName}_${lastName}_${email}_Claude_University_Course_Checkout`;
-        let merchantkey = `&merchantKey=51003cbA1094Ae1CC8fD7947526E1f79Dc0D9b90F07F1e315ec92600705BE225`;
-        let notifyUrl = `&notifyUrl=http://localhost:3000/api/payment/success`;
-        let refNo = `&refNo=201899997777999999911`;
-        let returnUrl = `&returnUrl=http://localhost:3000/`
-        let urlunhashed = amount + comment + merchantkey+notifyUrl+refNo+returnUrl
+        API.getKey()
+        .then(result=>{
+            console.log(result)
+            let amount = `amount=${tokenTotal}&coin=RCTFF`
+            let comment = `&comment=${firstName}_${lastName}_${email}_Claude_University_Course_Checkout`;
+            let merchantkey = `&merchantKey=${result.data.merchantkey}`;
+            let notifyUrl = `&notifyUrl=http://localhost:3000/api/payment/success`;
+            let refNo = `&refNo=201899997777999999911`;
+            let returnUrl = `&returnUrl=http://localhost:3000/`
+            let urlunhashed = amount + comment + merchantkey+notifyUrl+refNo+returnUrl
 
-        // console.log(urlunhashed)
-        
-        this.sha256Hash(urlunhashed)
+            // console.log(urlunhashed)
+
+            this.sha256Hash(urlunhashed)
+        }).catch(err=>{
+            console.log(err)
+            alert("API Error, please refresh page...If error persists, contact admin")
+        })
     }
     
     render() {

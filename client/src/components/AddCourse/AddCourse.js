@@ -21,7 +21,7 @@ class Photo extends React.Component {
       courseCode: "",
       tokenValue: "",
       courseDetail: "",
-      notice: "Image is required",
+      statusNotice: "Image is required",
     };
   }
 
@@ -153,7 +153,7 @@ class Photo extends React.Component {
             onClick={this.handleAddCourse}
           >Add</FormBtn>
           <br/><br/>
-          <p id="addNotice">{this.state.notice}</p>
+          <p id="addNotice">{this.state.statusNotice}</p>
         </div>
       </form>
     )

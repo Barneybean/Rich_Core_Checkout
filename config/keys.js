@@ -12,5 +12,9 @@ module.exports = {
   facebook: {
     id: process.env.FACEBOOK_APP_ID,
     secret: process.env.FACEBOOK_APP_SECRET
+  },
+  richCore: {
+    merchantKey: process.env.MERCHANT_KEY,
+    privateKey: process.env.PRIVATE_KEY
   }
 }

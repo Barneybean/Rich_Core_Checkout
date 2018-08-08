@@ -1,5 +1,4 @@
 import axios from "axios";
-import AdminCourseList from "../components/AdminCourseList/AdminCourseList";
 
 export default {
 
@@ -49,5 +48,8 @@ export default {
     },
     addCourse: (course) => {
         return axios.post("api/courses/", course)
+    },
+    getKey: () => {
+        return axios.get("api/payment/")
     }
 }
