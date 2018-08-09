@@ -8,7 +8,7 @@ router.route("/")
   .post(paymentController.makePayment)
   .get(paymentController.getKeys);
 
-router.route("/success/:status")
+router.route("/success/?*")
   .post(paymentController.paymentFB)
   .get(paymentController.handleReturnUrl);
 

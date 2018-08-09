@@ -2,6 +2,7 @@ const axios = require('axios');
 const CryptoJS = require("crypto-js");
 const keys = require("../config/keys");
 // Defining methods for the coursesController.
+
 module.exports = {
   getKeys: (req, res) => {
     // console.log(keys.richCore.merchantKey)
@@ -33,8 +34,19 @@ module.exports = {
     res.send({"message": "notifyUrl"})
   },
   handleReturnUrl: (req, res) => {
-    console.log("returnUrl", req.body)    
-    console.log("returnUrl", req.params.status)    
-    res.json({"message": "returnUrl"})
+    console.log("returnUrl", req.query)    
+    // hashstring and compare then handle result
+//     { refNo: '000000020180808000007',
+// [0]   serialNumber: '-Ew88puSEei5uwpUiRW4Zg',
+// [0]   amount: '2.00000000',
+// [0]   coin: 'RCTFF',
+// [0]   comment: 'william_gao_williamgao@gmail.com',
+// [0]   payState: 'PAY',
+// [0]   tradeState: 'SUCCESS',
+// [0]   sign: '963d32dea31af8c6644745159e45699d1005180391e2e843bb674ea822e93531' }
+
+    // parse amount, refNo to number
+
+    res.send("Payment Successful, please close this window")
   }
 };
