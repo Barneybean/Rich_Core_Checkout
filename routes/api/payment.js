@@ -8,6 +8,12 @@ router.route("/")
   .post(paymentController.makePayment)
   .get(paymentController.getKeys);
 
+router.route("/refno")
+  .get(paymentController.generateRefNo)
+
+router.route("/courseids")
+  .get(paymentController.hashCourseIds)
+
 router.route("/success/?*")
   .post(paymentController.paymentFB)
   .get(paymentController.handleReturnUrl);

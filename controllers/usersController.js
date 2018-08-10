@@ -147,17 +147,16 @@ module.exports = {
         .findOneAndUpdate({ _id: req.body.id }, { $set: { googleImage: req.body.url }})
         .then(dbModel => {
           res.json(dbModel)
-      })
+        })
       .catch(err => res.status(422).json(err));
       // console.log("here");
-    }
-      else{
-        res.json(dbModel)
       }
-    })
-    .catch(err => res.status(422).json(err));
+        else{
+          res.json(dbModel)
+        }
+      })
+      .catch(err => res.status(422).json(err));
   },
-  
   remove: function (req, res) {
     db.Users
       .findById({ _id: req.params.id })

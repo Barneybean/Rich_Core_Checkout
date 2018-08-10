@@ -52,6 +52,96 @@ class Cart extends Component {
         });
     }
 
+    //initiate richcore payment
+    handleTokenSubmit = (event) => {
+        event.preventDefault();
+        //add invoice numer  ############################
+        let courseIds = [];
+        this.props.addedToCart.forEach((item)=>{
+            courseIds.push(item._id)
+        })
+        
+        // console.log(courseIds);
+
+        let paymentInfo = {
+            courseIds: courseIds,
+            tokenTotal: this.state.tokenTotal,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            address: this.state.address,
+            city: this.state.city,
+            zipcode: this.state.zipcode,
+            state: this.state.state,
+            province: this.state.province,
+        }
+        
+        this.getMerchantKey(paymentInfo);
+    }
+
+    getMerchantKey = (paymentInfo) => {
+
+        API.getKey()
+        .then(result=>{
+            // console.log(result.data.merchantKey)
+            paymentInfo.merchantKey = result.data.merchantKey;
+            this.getRefNo(paymentInfo)
+        }).catch(err=>{
+            console.log(err)
+            alert("Merchantkey Error, please refresh page...If error persists, contact admin")
+        })
+    }
+
+    getRefNo = (paymentInfo) => {
+       
+        API.getRefNo()
+        .then( result =>{
+            console.log("refNo", result);
+            paymentInfo.referenceNo = result.data.refNo;
+            //to hashed comments into string then decrypt from return Url
+            this.getComment(paymentInfo)
+        }).catch(err=>{
+            console.log(err)
+            alert("Course Hashing Error, please refresh page...If error persists, contact admin")
+        })
+        
+    }
+
+    getComment = (paymentInfo) => {
+        let originalComment = {
+            firstName: paymentInfo.firstName,
+            lastName: paymentInfo.lastName,
+            courseIds: paymentInfo.courseIds
+        }
+
+        API.getHashedComment(originalComment)
+        .then(result => {
+
+            console.log("comment", result)
+            // console.log("payment", paymentInfo)
+            const {tokenTotal, merchantKey, referenceNo} = paymentInfo
+            // let amount = `amount=${tokenTotal}&coin=RICHT`
+            let amount = `amount=${tokenTotal}&coin=RCTFF`
+            //hash course id arr and use as comment then decipher in return url  #########
+            let comment = `&comment=${result.data.comment}`;
+            let merchantkey = `&merchantKey=${merchantKey}`;
+            // let notifyUrl = `&notifyUrl=acucheckout.herokuapp.com/api/payment/success`;
+            let notifyUrl = `&notifyUrl=http://localhost:3002/api/payment/success/`;
+            // have a increment value in hash url                                ###########
+            let refNo = `&refNo=${referenceNo}`;
+            // let returnUrl = `&returnUrl=http://acucheckout.herokuapp.com/`
+            let returnUrl = `&returnUrl=http://localhost:3002/api/payment/success/`
+            let urlunhashed = amount + comment + merchantkey+notifyUrl+refNo+returnUrl
+
+            // console.log(urlunhashed)
+
+            this.sha256Hash(urlunhashed)
+        }).catch(err=>{
+            console.log(err)
+            alert("Comment Hashing Error, please refresh page...If error persists, contact admin")
+        })
+    }
+
     sha256Hash = (urlunhashed) => {
         //call API and hash in server
         let hashedStr;
@@ -72,49 +162,6 @@ class Cart extends Component {
             console.log(err)
             alert("hash error..")
         });
-    }
-
-    //initiate richcore payment
-    handleTokenSubmit = (event) => {
-        event.preventDefault();
-        //add invoice numer  ############################
-        let paymentInfo = {
-            tokenTotal: this.state.tokenTotal,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            address: this.state.address,
-            city: this.state.city,
-            zipcode: this.state.zipcode,
-            state: this.state.state,
-            province: this.state.province,
-        }
-        const {tokenTotal, firstName, lastName, email} = paymentInfo
-        // console.log("payment", paymentInfo)
-
-        API.getKey()
-        .then(result=>{
-            // console.log(result.data.merchantKey)
-            // let amount = `amount=${tokenTotal}&coin=RICHT`
-            let amount = `amount=${tokenTotal}&coin=RCTFF`
-            //hash course id arr and use as comment then decipher in return url  #########
-            let comment = `&comment=${firstName}_${lastName}_${email}`;
-            let merchantkey = `&merchantKey=${result.data.merchantKey}`;
-            // let notifyUrl = `&notifyUrl=acucheckout.herokuapp.com/api/payment/success`;
-            let notifyUrl = `&notifyUrl=http://localhost:3002/api/payment/success/`;
-            // have a increment value in hash url                                ###########
-            let refNo = `&refNo=2018080800000000000007`;
-            // let returnUrl = `&returnUrl=http://acucheckout.herokuapp.com/`
-            let returnUrl = `&returnUrl=http://localhost:3002/api/payment/success/`
-            let urlunhashed = amount + comment + merchantkey+notifyUrl+refNo+returnUrl
-
-            // console.log(urlunhashed)
-
-            this.sha256Hash(urlunhashed)
-        }).catch(err=>{
-            console.log(err)
-            alert("API Error, please refresh page...If error persists, contact admin")
-        })
     }
     
     render() {

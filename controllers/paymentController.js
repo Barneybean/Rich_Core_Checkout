@@ -1,6 +1,8 @@
 const axios = require('axios');
 const CryptoJS = require("crypto-js");
 const keys = require("../config/keys");
+const db = require("../models");
+
 // Defining methods for the coursesController.
 
 module.exports = {
@@ -17,6 +19,31 @@ module.exports = {
     let hashedUrl = CryptoJS.HmacSHA256(req.body.url, keys.richCore.privateKey).toString(CryptoJS.enc.Hex)
     // console.log("hashedUrl controller", hashedUrl)
     res.json({hashed: hashedUrl})
+  },
+  generateRefNo: (req, res) => {
+
+    db.refNo
+      .find({})
+      .then(dbModel => {
+        // console.log(dbModel[0].refNo)
+        let referenceNumber = dbModel[0].refNo + 1
+        console.log(referenceNumber)
+        db.refNo
+          .update({"refNo": referenceNumber})
+          .then(dbModel => {
+            console.log(dbModel)
+            res.json({refNo: referenceNumber}) 
+          })
+          .catch(err => res.status(422).json(err));
+      })
+      .catch(err => res.status(422).json(err));
+    // referenceNumber = referenceNumber.toString();
+    // console.log(referenceNumber)
+
+  },
+  hashCourseIds: (req, res) => {
+    console.log("hashCourse", req.body)
+    res.json({comment: "comment"})
   },
   makePayment: (req, res) => {
     // console.log("make Payment", req.body)

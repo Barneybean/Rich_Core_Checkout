@@ -51,5 +51,11 @@ export default {
     },
     getKey: () => {
         return axios.get("api/payment/")
+    },
+    getRefNo: () => {
+        return axios.get("api/payment/refno")
+    },
+    getHashedComment: (courseIds) => {
+        return axios.post("api/payment/courseids", courseIds)
     }
 }
