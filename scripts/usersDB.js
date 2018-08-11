@@ -23,8 +23,8 @@ const usersSeed =
     city: " ",
     state: " ",
     zip_code: " ",
-    courses: [],
-    richCorePayments:[]
+    // courses: [],
+    // richCorePayments:[]
   },
   {
     userType: "admin",
@@ -39,8 +39,8 @@ const usersSeed =
     city: " ",
     state: " ",
     zip_code: " ",
-    courses: [],
-    richCorePayments:[]
+    // courses: [],
+    // richCorePayments:[]
   }
 ]
   

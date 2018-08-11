@@ -13,9 +13,10 @@ const usersSchema = new Schema({
     address: { type: String, required: false },
     city: { type: String, required: false },
     state: { type: String, required: false },
+    province: { type: String, required: false },
     zip_code: { type: String, required: false },
-    courses: [{ type: Schema.Types.ObjectId, required: false, ref: "courses"}],
-    richCorePayments:[{type: Schema.Types.ObjectId, required: false, ref: "richCorePayment"}]
+    // courses: [{ type: Schema.Types.ObjectId, required: false, ref: "courses"}],
+    // richCorePayments:[{type: Schema.Types.ObjectId, required: false, ref: "richCorePayment"}]
 });
 
 const User = mongoose.model("user", usersSchema);

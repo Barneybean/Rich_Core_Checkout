@@ -96,50 +96,64 @@ class Cart extends Component {
        
         API.getRefNo()
         .then( result =>{
-            console.log("refNo", result);
+            // console.log("refNo", result);
             paymentInfo.referenceNo = result.data.refNo;
             //to hashed comments into string then decrypt from return Url
-            this.getComment(paymentInfo)
+            this.createOrder(paymentInfo)
         }).catch(err=>{
             console.log(err)
-            alert("Course Hashing Error, please refresh page...If error persists, contact admin")
+            alert("refNo Hashing Error, please refresh page...If error persists, contact admin")
         })
         
     }
 
-    getComment = (paymentInfo) => {
-        let originalComment = {
+    createOrder = (paymentInfo) => {
+        let order = {
+            refNo: paymentInfo.referenceNo,
             firstName: paymentInfo.firstName,
             lastName: paymentInfo.lastName,
-            courseIds: paymentInfo.courseIds
+            email: paymentInfo.email,
+            courseIds: paymentInfo.courseIds,
+            address: paymentInfo.address,
+            city: paymentInfo.city,
+            state: paymentInfo.state,
+            province: paymentInfo.province,
+            zip_code: paymentInfo.zipcode,
         }
-
-        API.getHashedComment(originalComment)
+        console.log(order)
+        API.initiateOrder(order) 
         .then(result => {
+            // console.log(result)
+            // validate email
+            if (result.data.errors) {
+                alert(result.data.message)
+            } else {
+                // console.log("comment", result.data)
+                // console.log("payment", paymentInfo)
+                const {tokenTotal, merchantKey, referenceNo} = paymentInfo
+                // let amount = `amount=${tokenTotal}&coin=RICHT`
+                let amount = `amount=${tokenTotal}&coin=RCTFF`
+                //hash course id arr and use as comment then decipher in return url  #########
+                let comment = `&comment=${referenceNo}`;
+                let merchantkey = `&merchantKey=${merchantKey}`;
+                // let notifyUrl = `&notifyUrl=acucheckout.herokuapp.com/api/payment/success`;
+                let notifyUrl = `&notifyUrl=http://localhost:3002/api/payment/success/`;
+                // have a increment value in hash url                                ###########
+                let refNo = `&refNo=${referenceNo}`;
+                // let returnUrl = `&returnUrl=http://acucheckout.herokuapp.com/`
+                let returnUrl = `&returnUrl=http://localhost:3002/api/payment/success/`
+                let urlunhashed = amount + comment + merchantkey+notifyUrl+refNo+returnUrl
 
-            console.log("comment", result)
-            // console.log("payment", paymentInfo)
-            const {tokenTotal, merchantKey, referenceNo} = paymentInfo
-            // let amount = `amount=${tokenTotal}&coin=RICHT`
-            let amount = `amount=${tokenTotal}&coin=RCTFF`
-            //hash course id arr and use as comment then decipher in return url  #########
-            let comment = `&comment=${result.data.comment}`;
-            let merchantkey = `&merchantKey=${merchantKey}`;
-            // let notifyUrl = `&notifyUrl=acucheckout.herokuapp.com/api/payment/success`;
-            let notifyUrl = `&notifyUrl=http://localhost:3002/api/payment/success/`;
-            // have a increment value in hash url                                ###########
-            let refNo = `&refNo=${referenceNo}`;
-            // let returnUrl = `&returnUrl=http://acucheckout.herokuapp.com/`
-            let returnUrl = `&returnUrl=http://localhost:3002/api/payment/success/`
-            let urlunhashed = amount + comment + merchantkey+notifyUrl+refNo+returnUrl
+                // console.log(urlunhashed)
 
-            // console.log(urlunhashed)
-
-            this.sha256Hash(urlunhashed)
+                this.sha256Hash(urlunhashed)
+            }
         }).catch(err=>{
             console.log(err)
-            alert("Comment Hashing Error, please refresh page...If error persists, contact admin")
+            alert("Order Creation Error, please refresh page...If error persists, contact admin")
         })
+        
+        
     }
 
     sha256Hash = (urlunhashed) => {
@@ -242,7 +256,7 @@ class Cart extends Component {
                                         label="Province "
                                         value={this.state.province}
                                         onChange={this.handleInputChange}
-                                        name="Province"
+                                        name="province"
                                         placeholder="optional"
                                     />
                                     <PlainInput

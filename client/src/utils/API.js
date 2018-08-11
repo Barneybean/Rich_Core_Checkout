@@ -40,9 +40,6 @@ export default {
     hash: (url) => {
         return axios.post("/api/payment/hash", url)
     },
-    makePayment: (url) => {
-        return axios.post("api/payment/", url)
-    },
     deleteAdminCourse: (id) => {
         return axios.delete("api/courses/"+id)
     },
@@ -55,7 +52,7 @@ export default {
     getRefNo: () => {
         return axios.get("api/payment/refno")
     },
-    getHashedComment: (courseIds) => {
-        return axios.post("api/payment/courseids", courseIds)
+    initiateOrder: (order) => {
+        return axios.post("api/payment/order", order)
     }
 }

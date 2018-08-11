@@ -3,6 +3,7 @@ const CryptoJS = require("crypto-js");
 const keys = require("../config/keys");
 const db = require("../models");
 
+
 // Defining methods for the coursesController.
 
 module.exports = {
@@ -15,64 +16,70 @@ module.exports = {
   },
   hash: (req, res) => {
     // console.log("hash Controller", req.body)
-    // console.log(keys.richCore.privateKey)
     let hashedUrl = CryptoJS.HmacSHA256(req.body.url, keys.richCore.privateKey).toString(CryptoJS.enc.Hex)
     // console.log("hashedUrl controller", hashedUrl)
     res.json({hashed: hashedUrl})
   },
   generateRefNo: (req, res) => {
-
     db.refNo
       .find({})
       .then(dbModel => {
         // console.log(dbModel[0].refNo)
         let referenceNumber = dbModel[0].refNo + 1
-        console.log(referenceNumber)
+        // console.log(referenceNumber)
         db.refNo
           .update({"refNo": referenceNumber})
           .then(dbModel => {
-            console.log(dbModel)
+            // console.log(dbModel)
             res.json({refNo: referenceNumber}) 
           })
           .catch(err => res.status(422).json(err));
-      })
-      .catch(err => res.status(422).json(err));
-    // referenceNumber = referenceNumber.toString();
-    // console.log(referenceNumber)
+      }).catch(err => res.status(422).json(err));
+  },
+  initiateOrder: (req, res) => {
+    console.log("order",req.body)
 
-  },
-  hashCourseIds: (req, res) => {
-    console.log("hashCourse", req.body)
-    res.json({comment: "comment"})
-  },
-  makePayment: (req, res) => {
-    // console.log("make Payment", req.body)
-    axios.get(req.body.finalUrl)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    db.richCoreOrders
+      .create(req.body)
+      .then(dbModel => {
+        res.json(dbModel)
+      })
+      //return err for err handling
+      .catch(err => res.json(err));
   },
   paymentFB: (req, res) => {
     console.log("notifyUrl", req.params)
     console.log("notifyUrl",req.body)
-    res.send({"message": "notifyUrl"})
+    res.json({"message": "notifyUrl"})
   },
   handleReturnUrl: (req, res) => {
-    console.log("returnUrl", req.query)    
-    // hashstring and compare then handle result
-//     { refNo: '000000020180808000007',
-// [0]   serialNumber: '-Ew88puSEei5uwpUiRW4Zg',
-// [0]   amount: '2.00000000',
-// [0]   coin: 'RCTFF',
-// [0]   comment: 'william_gao_williamgao@gmail.com',
-// [0]   payState: 'PAY',
-// [0]   tradeState: 'SUCCESS',
-// [0]   sign: '963d32dea31af8c6644745159e45699d1005180391e2e843bb674ea822e93531' }
+    // console.log("returnUrl", req.url)    
+    // console.log("returnUrl", req.query)    
+    let toHash = `amount=${req.query.amount}&coin=${req.query.coin}&comment=${req.query.comment}&payState=${req.query.payState}&refNo=${req.query.refNo}&serialNumber=${req.query.serialNumber}&tradeState=${req.query.tradeState}`
+    // console.log(toHash)
+    let toCompare = CryptoJS.HmacSHA256(toHash, keys.richCore.privateKey).toString(CryptoJS.enc.Hex)
+    // console.log(toCompare)
+    if (toCompare === req.query.sign) {
+      // console.log("verified")
+      db.richCoreOrders
+        .findOneAndUpdate({ refNo: req.query.refNo }, req.query)
+        .then(dbModel => {
+          console.log(dbModel)
+          // res.json({message: "Password updated!"})
+        })
+        .catch(err => res.status(422).json(err));
+    }
 
-    // parse amount, refNo to number
+    // hashstring and compare then update db by refNo
+    //  { refNo: '20180000000095',
+    // [0]   serialNumber: 'vw8A5J0uEei4LQpUiRW4Zg',
+    // [0]   amount: '2.00000000',
+    // [0]   coin: 'RCTFF',
+    // [0]   comment: '20180000000095',
+    // [0]   payState: 'PAY',
+    // [0]   tradeState: 'SUCCESS',
+    // [0]   sign: '9b7cbe3566edc5db927ee4c2ee3d54ad81145aee8306bf4725cf3b95e9880d45' }
+
 
     res.send("Payment Successful, please close this window")
   }
