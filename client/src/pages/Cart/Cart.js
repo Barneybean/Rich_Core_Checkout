@@ -137,6 +137,7 @@ class Cart extends Component {
                 let comment = `&comment=${referenceNo}`;
                 let merchantkey = `&merchantKey=${merchantKey}`;
                 // let notifyUrl = `&notifyUrl=acucheckout.herokuapp.com/api/payment/success`;
+                //notify url will use post return url uses get
                 let notifyUrl = `&notifyUrl=http://localhost:3002/api/payment/success/`;
                 // have a increment value in hash url                                ###########
                 let refNo = `&refNo=${referenceNo}`;
@@ -167,7 +168,7 @@ class Cart extends Component {
             hashedStr = result.data.hashed
             //add signature to url
             let finalUrlObj = {finalUrl: mainStr + urlunhashed + `&signature=${hashedStr}`}
-            // window.open(finalUrlObj.finalUrl)
+            console.log(finalUrlObj.finalUrl)
             this.popitup(finalUrlObj.finalUrl, "RichCore Payment");
         })
         .catch(err => {
