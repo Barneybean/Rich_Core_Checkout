@@ -9,7 +9,7 @@ mongoose.connect(
 );
 
 const refNoSeed = [{
-    refNo: 20180000000001
+    refNo: 201800000000001
 }]
   
 
