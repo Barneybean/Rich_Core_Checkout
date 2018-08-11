@@ -16,5 +16,8 @@ module.exports = {
   richCore: {
     merchantKey: process.env.MERCHANT_KEY,
     privateKey: process.env.PRIVATE_KEY
+  },
+  gmail: {
+    psw: process.env.PSW
   }
 }

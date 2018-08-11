@@ -28,6 +28,7 @@
     "express": "^4.15.4",
     "if-env": "^1.0.4",
     "mongoose": "^5.0.17",
+    "nodemailer": "^4.6.7",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-dropzone": "^4.3.0",

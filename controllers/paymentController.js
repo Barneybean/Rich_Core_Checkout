@@ -1,9 +1,7 @@
-const axios = require('axios');
 const CryptoJS = require("crypto-js");
 const keys = require("../config/keys");
 const db = require("../models");
-
-
+var nodemailer = require('nodemailer');
 // Defining methods for the coursesController.
 
 module.exports = {
@@ -37,7 +35,7 @@ module.exports = {
       }).catch(err => res.status(422).json(err));
   },
   initiateOrder: (req, res) => {
-    console.log("order",req.body)
+    // console.log("order",req.body)
 
     db.richCoreOrders
       .create(req.body)
@@ -65,22 +63,34 @@ module.exports = {
         .findOneAndUpdate({ refNo: req.query.refNo }, req.query)
         .then(dbModel => {
           console.log(dbModel)
-          // res.json({message: "Password updated!"})
+          var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'dentsoftucb@gmail.com',
+              pass: keys.gmail.psw
+            }
+          });
+          
+          var mailOptions = {
+            from: 'dentsoftucb@gmail.com',
+            to: dbModel.email,
+            subject: `Thank you for Registering Class in American Claude University`,
+            text: `Thank you for Registering Class in American Claude University! 
+            your order reference number is ${req.query.refNo} 
+            Paid Amount = ${req.query.amount} ${req.query.coin}`
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+          res.send("Payment Successful, a confirmation message will be sent to your email. Please close this window")
         })
         .catch(err => res.status(422).json(err));
     }
 
-    // hashstring and compare then update db by refNo
-    //  { refNo: '20180000000095',
-    // [0]   serialNumber: 'vw8A5J0uEei4LQpUiRW4Zg',
-    // [0]   amount: '2.00000000',
-    // [0]   coin: 'RCTFF',
-    // [0]   comment: '20180000000095',
-    // [0]   payState: 'PAY',
-    // [0]   tradeState: 'SUCCESS',
-    // [0]   sign: '9b7cbe3566edc5db927ee4c2ee3d54ad81145aee8306bf4725cf3b95e9880d45' }
-
-
-    res.send("Payment Successful, please close this window")
   }
 };

@@ -120,7 +120,7 @@ class Cart extends Component {
             province: paymentInfo.province,
             zip_code: paymentInfo.zipcode,
         }
-        console.log(order)
+        // console.log(order)
         API.initiateOrder(order) 
         .then(result => {
             // console.log(result)
@@ -167,15 +167,19 @@ class Cart extends Component {
             hashedStr = result.data.hashed
             //add signature to url
             let finalUrlObj = {finalUrl: mainStr + urlunhashed + `&signature=${hashedStr}`}
-            console.log(finalUrlObj)
-            //call that API
-            window.open(finalUrlObj.finalUrl)
-            
+            // window.open(finalUrlObj.finalUrl)
+            this.popitup(finalUrlObj.finalUrl, "RichCore Payment");
         })
         .catch(err => {
             console.log(err)
             alert("hash error..")
         });
+    }
+
+    popitup = (url,windowName) => {
+        let newwindow=window.open(url,windowName,'height=900,width=1100');
+        if (window.focus) {newwindow.focus()}
+        return false;
     }
     
     render() {
