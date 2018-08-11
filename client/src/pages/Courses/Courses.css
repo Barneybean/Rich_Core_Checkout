@@ -3,7 +3,7 @@ a {
 }
 
 #detailContainer {
-    border-left: 2px solid green;
+    border-left: 1px solid rgb(191, 196, 191);
 }
 
 #addModelBody {

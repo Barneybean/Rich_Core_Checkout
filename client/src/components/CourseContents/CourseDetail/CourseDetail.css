@@ -5,22 +5,25 @@ h5 h6 {
 
 .courseDetail > img {
     height: auto;
-    width: 80%;
+    width: 60%;
     margin-bottom: 1rem;
     margin-top: 1rem;
+    /* margin: 0 auto; */
 }
 
 .courseDetail {
+    padding: 0 auto;
     margin: 0 auto;
 }
 
 .btn-raised {
-    width: 80%;
+    width: 60%;
     margin-bottom: 1rem;
 }
 
 #detailDisplay {
-    overflow: auto
+    overflow: auto;
+    padding-left: 2rem;
 }
 
 h6 > span {

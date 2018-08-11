@@ -11,6 +11,7 @@ a {
 .logo {
     padding-left: 40px;
     height: 80px;
+    overflow: auto;
     /* margin-left: 5px; */
 }
 

@@ -3,7 +3,7 @@
     float: left;
     height: 18.2vw;
     width: 18vw;
-    border: 2px solid rgb(25, 62, 73);
+    border: 0.5px solid rgb(67, 69, 70);
 }
 
 .courseTitle {
@@ -24,7 +24,7 @@
 }
 
 .courseImage > img:hover {
-    border-style: outset;
+    box-shadow: 0 4px 8px 0 rgba(223, 106, 106, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 @media only screen and (max-width: 767px) {
