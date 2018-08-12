@@ -31,6 +31,10 @@
     padding: 0 !important;
 }
 
+.overflow {
+    overflow: auto;
+}
+
 section {
     height: 800px;
     padding: 1rem;

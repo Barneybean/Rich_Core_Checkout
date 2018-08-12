@@ -54,5 +54,8 @@ export default {
     },
     initiateOrder: (order) => {
         return axios.post("api/payment/order", order)
+    },
+    loadPaymentHistory: () => {
+        return axios.get("api/payment/history")
     }
 }

@@ -1,10 +1,12 @@
 import React, { Component } from "react"
 import "./Admin.css"
-import Profile from "../../components/Profile"
 import API from "../../utils/API"
 import { Row, Col, Container } from "../../components/Grid";
+import { PlainInput, FormBtn } from "../../components/Form";
+import Profile from "../../components/Profile"
 import AdminCourseList from "../../components/AdminCourseList/AdminCourseList";
 import AddCourse from "../../components/AddCourse"
+import PaymentHist from "../../components/PaymentHist"
 
 class Admin extends Component {
 
@@ -18,7 +20,8 @@ class Admin extends Component {
             profileNotice: "No action since logged in",
             imageLink: "",
             editing: false,
-            AdminCourseEdit: false
+            AdminCourseEdit: false,
+            emailSearch: ""
         }
     }
 
@@ -28,6 +31,18 @@ class Admin extends Component {
 
         this.setState({
             loggedinId: cookieId,
+        })
+
+        this.loadPaymentHistory();
+    }
+
+    loadPaymentHistory = () => {
+        API.loadPaymentHistory()
+        .then(result=>{
+            console.log(result);
+        }).catch(err=>{
+            console.log(err)
+            alert(`Payment history failed to load, please refresh or contact admin`)
         })
     }
 
@@ -86,6 +101,11 @@ class Admin extends Component {
         })
     }
 
+    handleEmailSearch = (event) => {
+        event.preventDefault();
+        console.log("email search", this.state.emailSearch)
+    }
+
     render() {
         return (
             <div className=" admin">
@@ -129,7 +149,42 @@ class Admin extends Component {
                             </Container>
                         </section>
                         <section id="orders">
-                            view orders
+                            <Container>
+                                <Row>
+                                    <Col size="7">
+                                        <span className="header"> ALL PAYMENT HISTORY </span>                                        
+                                        <div className="col-lg overflow">
+                                            <PaymentHist/>
+
+                                        </div>
+                                    </Col>
+                                    <Col size="5">
+                                        <Row>
+                                            <Col size="12">
+                                                <PlainInput 
+                                                    label="SEARCH BY STUDENT EMAIL"
+                                                    placeholder="example@gmail.com"
+                                                    onChange={this.handleInputChange}
+                                                    name="emailSearch"
+                                                    value={this.state.emailSearch}
+                                                />
+                                                <FormBtn 
+                                                    float=""
+                                                    disabled = {!this.state.emailSearch}
+                                                    onClick = {this.handleEmailSearch}
+                                                >
+                                                    Search
+                                                </FormBtn>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col size="12">
+                                                RESULT
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </Row>
+                            </Container>
                         </section>
                         <section id="profile">
                             <Profile

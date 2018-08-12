@@ -19,6 +19,7 @@ const richCoreOrdersSchema = new Schema({
     state: { type: String, required: false },
     province: { type: String, required: false },
     zip_code: { type: String, required: false },
+    time : { type : Date, default: Date.now }
 });
 
 const RichCoreOrders = mongoose.model("richCoreOrders", richCoreOrdersSchema);

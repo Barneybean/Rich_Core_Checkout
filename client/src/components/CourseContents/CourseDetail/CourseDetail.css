@@ -24,6 +24,7 @@ h5 h6 {
 #detailDisplay {
     overflow: auto;
     padding-left: 2rem;
+    margin-bottom: 2rem;
 }
 
 h6 > span {

@@ -51,7 +51,7 @@ module.exports = {
     res.json({"message": "notifyUrl"})
   },
   handleReturnUrl: (req, res) => {
-    // console.log("returnUrl", req.url)    
+    // console.log("returnUrl", req)    
     // console.log("returnUrl", req.query)    
     let toHash = `amount=${req.query.amount}&coin=${req.query.coin}&comment=${req.query.comment}&payState=${req.query.payState}&refNo=${req.query.refNo}&serialNumber=${req.query.serialNumber}&tradeState=${req.query.tradeState}`
     // console.log(toHash)
@@ -66,13 +66,13 @@ module.exports = {
           var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: 'dentsoftucb@gmail.com',
+              user: 'claudeuniversity@usjus.org',
               pass: keys.gmail.psw
             }
           });
           
           var mailOptions = {
-            from: 'dentsoftucb@gmail.com',
+            from: 'claudeuniversity@usjus.org',
             to: dbModel.email,
             subject: `Thank you for Registering Class in American Claude University`,
             text: `
@@ -80,7 +80,9 @@ module.exports = {
 
             your order reference number is ${req.query.refNo} 
 
-            Paid Amount = ${req.query.amount} ${req.query.coin}`
+            Paid Amount = ${req.query.amount} ${req.query.coin}
+            
+            TimeStamp: ${dbModel.time}`
           };
           
           transporter.sendMail(mailOptions, function(error, info){
@@ -96,6 +98,14 @@ module.exports = {
         })
         .catch(err => res.status(422).json(err));
     }
-
+  },
+  loadPaymentHistory: (req, res) => {
+    db.richCoreOrders
+      .findAll({})
+      .then(dbModel => {
+        res.json(dbModel)
+      })
+      //return err for err handling
+      .catch(err => res.json(err));
   }
 };
