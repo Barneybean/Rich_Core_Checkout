@@ -5,8 +5,10 @@ import CartImage from "../../assets/images/cart.png"
 const Cart = ({cartCount}) => (
 
         <div id="carContainer">
-            <a href="/cart"><img id="cart" src={CartImage} height="30px" width="30" alt="cart"/></a>
-            <a href="/cart"><p id="cartCount">({cartCount})</p></a>
+            <div className="row">
+                <a href="/cart"><img id="cart" src={CartImage} height="20px" width="20px" alt="cart"/></a>
+                <a href="/cart"><span id="count">({cartCount})</span></a>
+            </div>
         </div>
 )
 

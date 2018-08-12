@@ -1,12 +1,11 @@
 import React from "react"
 import "./StateDrop.css"
-import {FormGroup, Input, Label} from 'reactstrap'
+import { Input, Label} from 'reactstrap'
 
 const StateDrop = (props) => {
     return (
-        <div>
-        <FormGroup className="pt-5">
-            <Label for="state" style={{color: "black", fontSize: "1em"}}>State</Label>
+        <div id="stateDropDown">
+            <Label for="state" style={{color: "black", fontSize: "1em", margin: "12px 2px"}}>State</Label>
             <Input 
                 type="select"
                 name="state" 
@@ -68,7 +67,6 @@ const StateDrop = (props) => {
                 <option value="WI">Wisconsin</option>
                 <option value="WY">Wyoming</option>
             </Input>
-        </FormGroup>
         </div>
     )
 }

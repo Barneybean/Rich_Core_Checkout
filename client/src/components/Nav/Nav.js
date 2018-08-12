@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Nav.css"
-import { Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
+// import { Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -23,18 +23,18 @@ class NavBar extends React.Component {
       <div className="navbar">
         <ul className="nav">
           <li className="nav-item">
-            <a className="nav-link" href="/home" hidefocus="hidefocus">Home</a>
+            <a className="nav-link" href="https://www.claudeuniversity.org/" hidefocus="hidefocus">Home</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="about Us" hidefocus="hidefocus">About Us</a>
+            <a className="nav-link" href="https://www.claudeuniversity.org/about" hidefocus="hidefocus">About Us</a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="programs" hidefocus="hidefocus">Programs</a>
-          </li>
+          {/* <li className="nav-item">
+            <a className="nav-link" href="https://www.claudeuniversity.org/shop" hidefocus="hidefocus">Programs</a>
+          </li> */}
           <li className="nav-item">
             <a className="nav-link" href="/" hidefocus="hidefocus">Courses</a>
           </li>
-          <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+          {/* <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle nav caret>
               Dropdown
               </DropdownToggle>
@@ -45,7 +45,7 @@ class NavBar extends React.Component {
               <DropdownItem divider />
               <DropdownItem>Another Action</DropdownItem>
             </DropdownMenu>
-          </Dropdown>
+          </Dropdown> */}
         </ul>
       </div>
     );

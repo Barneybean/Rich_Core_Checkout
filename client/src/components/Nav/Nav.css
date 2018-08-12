@@ -5,10 +5,10 @@ a {
 
 .navbar {
     background-color: rgb(244, 247, 245);
-    height: 46px ;
+    height: 43px ;
     padding: 0 ;
     font-size: 0.7rem;
-    border-bottom: 6px solid rgb(149, 106, 250);
+    border-bottom: 3px solid rgb(44, 3, 141);
 }
 
 .nav-item {
@@ -17,12 +17,16 @@ a {
 
 .nav-item:hover {
     text-decoration: none !important;
-    background-color: rgb(149, 106, 250);
+    background-color: rgb(44, 3, 141);
 }
 
 .nav-link {
     text-decoration: none !important;
     color: rgb(31, 29, 29) !important;
+}
+
+.nav-link:hover {
+    color: rgb(253, 252, 252) !important;
 }
 
 @media only screen and (max-width: 730px) {

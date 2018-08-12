@@ -3,15 +3,15 @@
 }
 
 #itemList {
-    border-top: 2px solid grey;
-    border-bottom: 2px solid grey;
+    border-top: 0.5px solid rgb(151, 151, 151);
+    border-bottom: 0.5px solid rgb(168, 166, 166);
     padding: 30px 0px;
 }
 
 .header {
     color: rgb(78, 139, 237);
     font-weight: 600;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 #subtotal{
@@ -19,5 +19,5 @@
     float: right;
     margin-top: 1rem;
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }

@@ -16,7 +16,7 @@ const CheckoutList = (props)=> {
                     onClick={()=>{deleteItemInCart(courseCode)}}
                 />
                 <br/>
-                <h6 id="token">{tokenValue} ClaudeCoins</h6>
+                <h6 id="token">{tokenValue} Richcore Coin</h6>
             </div>
         </div>
     )

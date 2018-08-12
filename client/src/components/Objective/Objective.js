@@ -7,7 +7,7 @@ const Objective = () => {
     return (
         // <div id="objective" style={{ height:y}}>
         <div id="objective">
-            <h1>Objective</h1>
+            <h3>Objective</h3>
             <p>The goal of these courses is to give the students understandings of what is blockchain and how it impacts or will impact the technologies as well as economics, and teach the students to develop blockchain applications using popular blockchain frameworks, such as bitcoins and Ethereum. More specifically, this course will cover：</p>
             <ul>
                 <li>Blockchain history - what is blockchain and when it starts</li>

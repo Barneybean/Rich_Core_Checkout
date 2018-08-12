@@ -8,16 +8,16 @@ const Footer = () => {
 				<div className="container">
 					<div className="row">
 						<div className="col-md-3 footer-about wow fadeInUp">
-							<p>
-								Claude Wang
-		        			</p>
-							<p><a>Our Team</a></p>
+							<h3>
+								America Claude University 
+		        			</h3>
+							{/* <p><a>Our Team</a></p> */}
 						</div>
 						<div className="col-md-4 offset-md-1 footer-contact wow fadeInDown">
 							<h3>Contact</h3>
 							<p><i className="fas fa-map-marker-alt"></i> 1631 N 1st St s200, San Jose CA 95112</p>
 							<p><i className="fas fa-phone"></i> Phone: (408)571-6516</p>
-							<p><i className="fas fa-envelope"></i> Email: <a href="mailto:hello@domain.com">usj@usjus.edu</a></p>
+							<p><i className="fas fa-envelope"></i> Email: <a href="mailto:claudeuniversity@usjus.org" id="footerEmail">claudeuniversity@usjus.org</a></p>
 						</div>
 						<div className="col-md-4 footer-links wow fadeInUp">
 							<div className="row">
@@ -27,7 +27,7 @@ const Footer = () => {
 							</div>
 							<div className="row">
 								<div className="col-md-6">
-									<p><a className="scroll-link" href="#top-content">Home</a></p>
+									<p><a className="scroll-link" href="https://www.claudeuniversity.org/">Home</a></p>
 									<p><a >Features</a></p>
 									<p><a >How it works</a></p>
 									<p><a >Our clients</a></p>
@@ -46,7 +46,7 @@ const Footer = () => {
 				<div className="container">
 					<div className="row">
 						<div className="col-md-6 footer-copyright">
-							&copy; by <a href="https://google.com">Claude Universtiy</a>
+							&copy; by <a href="https://www.claudeuniversity.org/">America Claude Universtiy</a>
 						</div>
 						<div className="col-md-6 footer-social">
 							<a ><i className="fab fa-facebook-f"></i></a>

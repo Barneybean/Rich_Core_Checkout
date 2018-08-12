@@ -75,8 +75,11 @@ module.exports = {
             from: 'dentsoftucb@gmail.com',
             to: dbModel.email,
             subject: `Thank you for Registering Class in American Claude University`,
-            text: `Thank you for Registering Class in American Claude University! 
+            text: `
+            Thank you for Registering Class in American Claude University! 
+
             your order reference number is ${req.query.refNo} 
+
             Paid Amount = ${req.query.amount} ${req.query.coin}`
           };
           
@@ -87,7 +90,7 @@ module.exports = {
               console.log('Email sent: ' + info.response);
             }
           });
-          res.send("Payment Successful, a confirmation message will be sent to your email. Please close this window")
+          res.send("Payment successed, a confirmation message will be sent to your email. Please close this window")
         })
         .catch(err => res.status(422).json(err));
     }

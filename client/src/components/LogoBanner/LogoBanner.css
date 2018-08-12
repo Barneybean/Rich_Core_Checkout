@@ -11,13 +11,17 @@ a {
 .logo {
     padding-left: 40px;
     height: 80px;
-    overflow: auto;
-    /* margin-left: 5px; */
+    clear: both;
+    display: table;
+}
+
+#adminBtn {
+    font-size: 0.7rem;
 }
 
 #loginState {
-    padding-top: 35px;
-    font-size: 1rem;
+    padding-top: 3.1rem;
+    font-size: 0.7rem;
     cursor: pointer;
 }
 

@@ -3,18 +3,17 @@
     position: relative;
 }
 
-#cartCount {
+#count {
     position: absolute;
-    bottom: -15px;
-    right: 20px;
-    color: rgb(15, 15, 15);
-    font-size: 12px; 
-   
+    bottom: 24px;
+    right: 23px;
+    color: rgb(71, 70, 70);
+    font-size: 15px !important; 
 }
 
 #cart {
     position: absolute;
-    bottom: 5px;
+    bottom: 25px;
     right: 35px;
 }
 
