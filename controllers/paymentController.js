@@ -90,7 +90,9 @@ module.exports = {
               console.log('Email sent: ' + info.response);
             }
           });
-          res.send("Payment successed, a confirmation message will be sent to your email. Please close this window")
+          res.send(`Payment successed! Order Reference Number: ${req.query.refNo} 
+          A confirmation message will be sent to your email shortly. 
+          Please close this window`)
         })
         .catch(err => res.status(422).json(err));
     }
