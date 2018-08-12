@@ -105,6 +105,8 @@ module.exports = {
   loadAllPaymentHistory: (req, res) => {
     db.richCoreOrders
       .find({})
+      .sort({'time': -1})
+      .limit(30)
       .then(dbModel => {
         res.json(dbModel)
       })
