@@ -17,7 +17,7 @@ router.route("/success/?*")
   .post(paymentController.paymentFB)
   .get(paymentController.handleReturnUrl);
 
-router.route("/history")
-  .get(paymentController.loadPaymentHistory);
+router.route("/allhistory")
+  .get(paymentController.loadAllPaymentHistory);
 
 module.exports = router;

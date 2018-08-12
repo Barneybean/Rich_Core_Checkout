@@ -21,7 +21,8 @@ class Admin extends Component {
             imageLink: "",
             editing: false,
             AdminCourseEdit: false,
-            emailSearch: ""
+            emailSearch: "",
+            paymentHistory: []
         }
     }
 
@@ -32,24 +33,30 @@ class Admin extends Component {
         this.setState({
             loggedinId: cookieId,
         })
-
-        this.loadPaymentHistory();
+        // this.load30PaymentHistory();
+        this.loadAllPayments();
     }
 
-    loadPaymentHistory = () => {
-        API.loadPaymentHistory()
+    loadAllPayments = () => {
+        //limit to 30
+        API.loadAllPaymentHistory()
         .then(result=>{
-            console.log(result);
+            // console.log(result);
+            this.setState({paymentHistory: result.data})
         }).catch(err=>{
             console.log(err)
             alert(`Payment history failed to load, please refresh or contact admin`)
         })
     }
 
+    load30Payments = () => {
+        console.log("load30")
+    }
+
     editProfile = () => {
         (this.state.editing) ?
-            this.editPassword()
-            : this.setState({ editing: true });
+        this.editPassword()
+        : this.setState({ editing: true });
     }
 
     handleInputChange = event => {
@@ -107,6 +114,7 @@ class Admin extends Component {
     }
 
     render() {
+        // console.log(this.state.paymentHistory)
         return (
             <div className=" admin">
                 <div className="row"> 
@@ -152,10 +160,27 @@ class Admin extends Component {
                             <Container>
                                 <Row>
                                     <Col size="7">
-                                        <span className="header"> ALL PAYMENT HISTORY </span>                                        
+                                        <span className="header"> RECENT PAYMENT HISTORY - default 30 items</span>  
+                                        <FormBtn 
+                                            onClick={this.loadAllPayments}
+                                        >SHOW ALL</FormBtn>                                      
                                         <div className="col-lg overflow">
-                                            <PaymentHist/>
-
+                                            {this.state.paymentHistory.map((item, i) => {
+                                                return (
+                                                    <PaymentHist
+                                                        key={i}
+                                                        num={i+1}
+                                                        refNo={item.refNo}
+                                                        coin={item.coin}
+                                                        amount={item.amount}
+                                                        email={item.email}
+                                                        firstName={item.firstName}
+                                                        lastName={item.lastName}
+                                                        time={item.time}
+                                                        courseIds={item.courseIds}
+                                                    />
+                                                )
+                                            })}
                                         </div>
                                     </Col>
                                     <Col size="5">

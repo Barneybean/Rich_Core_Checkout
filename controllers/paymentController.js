@@ -63,6 +63,11 @@ module.exports = {
         .findOneAndUpdate({ refNo: req.query.refNo }, req.query)
         .then(dbModel => {
           console.log(dbModel)
+
+          res.send(`Payment successed! Order Reference Number: ${req.query.refNo} 
+          A confirmation message will be sent to your email shortly. 
+          Please close this window`)
+
           var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -70,7 +75,7 @@ module.exports = {
               pass: keys.gmail.psw
             }
           });
-          
+         
           var mailOptions = {
             from: 'claudeuniversity@usjus.org',
             to: dbModel.email,
@@ -92,16 +97,14 @@ module.exports = {
               console.log('Email sent: ' + info.response);
             }
           });
-          res.send(`Payment successed! Order Reference Number: ${req.query.refNo} 
-          A confirmation message will be sent to your email shortly. 
-          Please close this window`)
+         
         })
         .catch(err => res.status(422).json(err));
     }
   },
-  loadPaymentHistory: (req, res) => {
+  loadAllPaymentHistory: (req, res) => {
     db.richCoreOrders
-      .findAll({})
+      .find({})
       .then(dbModel => {
         res.json(dbModel)
       })
