@@ -36,7 +36,6 @@ module.exports = {
   },
   initiateOrder: (req, res) => {
     // console.log("order",req.body)
-
     db.richCoreOrders
       .create(req.body)
       .then(dbModel => {
@@ -75,7 +74,6 @@ module.exports = {
               pass: keys.gmail.psw
             }
           });
-         
           var mailOptions = {
             from: 'claudeuniversity@usjus.org',
             to: dbModel.email,
@@ -85,9 +83,8 @@ module.exports = {
 
             your order reference number is ${req.query.refNo} 
 
-            Paid Amount = ${req.query.amount} ${req.query.coin}
+            Paid Amount = ${req.query.amount} ${req.query.coin}`
             
-            TimeStamp: ${dbModel.time}`
           };
           
           transporter.sendMail(mailOptions, function(error, info){
@@ -105,8 +102,29 @@ module.exports = {
   loadAllPaymentHistory: (req, res) => {
     db.richCoreOrders
       .find({})
-      .sort({'time': -1})
+      // .sort({'time': -1})
+      // .limit(30)
+      .then(dbModel => {
+        res.json(dbModel)
+      })
+      //return err for err handling
+      .catch(err => res.json(err));
+  },
+  load30PaymentHistory: (req, res) => {
+    db.richCoreOrders
+      .find({})
+      .sort({'time': 1})
       .limit(30)
+      .then(dbModel => {
+        res.json(dbModel)
+      })
+      //return err for err handling
+      .catch(err => res.json(err));
+  },
+  loadPaymentByEmail: (req, res) => {
+    db.richCoreOrders
+      .find({email: req.body.email})
+      .sort({'time': 1})
       .then(dbModel => {
         res.json(dbModel)
       })

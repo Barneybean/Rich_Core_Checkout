@@ -5,7 +5,8 @@ router.route("/hash")
   .post(paymentController.hash);
 
 router.route("/")
-  .get(paymentController.getKeys);
+  .get(paymentController.getKeys)
+  .post(paymentController.loadPaymentByEmail);
 
 router.route("/refno")
   .get(paymentController.generateRefNo)
@@ -19,5 +20,8 @@ router.route("/success/?*")
 
 router.route("/allhistory")
   .get(paymentController.loadAllPaymentHistory);
+
+router.route("/30history")
+  .get(paymentController.load30PaymentHistory);
 
 module.exports = router;

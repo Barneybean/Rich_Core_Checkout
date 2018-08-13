@@ -14,9 +14,6 @@ export default {
     createAccount: (newUser)=> {
         return axios.post("/api/user/signup", newUser);
     },
-    searchByEmail: (email) => {
-        return axios.get("/api/user/" + email);
-    },
     searchById: (id) => {
         // console.log("api", id)
         return axios.get("/api/user/get/" + id );
@@ -57,5 +54,11 @@ export default {
     },
     loadAllPaymentHistory: () => {
         return axios.get("api/payment/allhistory")
-    }
+    },
+    load30PaymentHistory: () => {
+        return axios.get("api/payment/30history")
+    },
+    searchPaymentByEmail: (email) => {
+        return axios.post("/api/payment/", email);
+    },
 }

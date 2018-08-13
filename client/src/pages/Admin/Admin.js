@@ -22,6 +22,7 @@ class Admin extends Component {
             editing: false,
             AdminCourseEdit: false,
             emailSearch: "",
+            emailSearchResults:[],
             paymentHistory: []
         }
     }
@@ -33,12 +34,11 @@ class Admin extends Component {
         this.setState({
             loggedinId: cookieId,
         })
-        // this.load30PaymentHistory();
-        this.loadAllPayments();
+        this.load30Payments();
+        // this.loadAllPayments();
     }
 
     loadAllPayments = () => {
-        //limit to 30
         API.loadAllPaymentHistory()
         .then(result=>{
             // console.log(result);
@@ -50,7 +50,15 @@ class Admin extends Component {
     }
 
     load30Payments = () => {
-        console.log("load30")
+        //limit to 30
+        API.load30PaymentHistory()
+        .then(result=>{
+            // console.log(result);
+            this.setState({paymentHistory: result.data.reverse()})
+        }).catch(err=>{
+            console.log(err)
+            alert(`Payment history failed to load, please refresh or contact admin`)
+        })
     }
 
     editProfile = () => {
@@ -110,7 +118,16 @@ class Admin extends Component {
 
     handleEmailSearch = (event) => {
         event.preventDefault();
-        console.log("email search", this.state.emailSearch)
+        // console.log("email search", this.state.emailSearch)
+        API.searchPaymentByEmail({email: this.state.emailSearch})
+        .then(result=>{
+            // console.log(result.data)
+            this.setState({emailSearchResults: result.data})
+          
+        }).catch(err=>{
+            console.log(err)
+            alert("Search error, please try again or contact admin")
+        })
     }
 
     render() {
@@ -164,6 +181,9 @@ class Admin extends Component {
                                         <FormBtn 
                                             onClick={this.loadAllPayments}
                                         >SHOW ALL</FormBtn>                                      
+                                        <FormBtn 
+                                            onClick={this.load30Payments}
+                                        >SHOW LATEST 30 ITEMS</FormBtn>                                      
                                         <div className="col-lg overflow">
                                             {this.state.paymentHistory.map((item, i) => {
                                                 return (
@@ -177,7 +197,8 @@ class Admin extends Component {
                                                         firstName={item.firstName}
                                                         lastName={item.lastName}
                                                         time={item.time}
-                                                        courseIds={item.courseIds}
+                                                        courseCodes={item.courseCodes}
+                                                        courseNames={item.name}
                                                     />
                                                 )
                                             })}
@@ -205,6 +226,25 @@ class Admin extends Component {
                                         <Row>
                                             <Col size="12">
                                                 RESULT
+                                                <div className="col-lg overflow">
+                                                    {this.state.emailSearchResults.map((item, i) => {
+                                                        return (
+                                                            <PaymentHist
+                                                                key={i}
+                                                                num={i+1}
+                                                                refNo={item.refNo}
+                                                                coin={item.coin}
+                                                                amount={item.amount}
+                                                                email={item.email}
+                                                                firstName={item.firstName}
+                                                                lastName={item.lastName}
+                                                                time={item.time}
+                                                                courseCodes={item.courseCodes}
+                                                                courseNames={item.name}
+                                                            />
+                                                        )
+                                                    })}
+                                                </div>
                                             </Col>
                                         </Row>
                                     </Col>

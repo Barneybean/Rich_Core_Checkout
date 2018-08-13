@@ -14,6 +14,8 @@ const richCoreOrdersSchema = new Schema({
     lastName: {type: String, required: false},
     email: {type: String, required: true, match: [/.+@.+\..+/, "Please enter a valid e-mail address"]},
     courseIds: [{ type: Schema.Types.ObjectId, required: false, ref: "courses"}],
+    courseCodes: [{ type: String, required: false, ref: "courses"}],
+    name: [{ type: String, required: false, ref: "courses"}],
     address: { type: String, required: false },
     city: { type: String, required: false },
     state: { type: String, required: false },
