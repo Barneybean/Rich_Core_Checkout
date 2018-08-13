@@ -14,7 +14,7 @@ class CourseDetail extends Component {
             <div id="detailDisplay">
                 {courseImage ? (
                     <div className="courseDetail">
-                        <img id={_id} src={courseImage} alt={name} />
+                        <img className="detailImg" id={_id} src={courseImage} alt={name} />
                         <hr />
                         <button type="button" className="btn btn-raised btn-danger"
                             onClick={() => { this.click(courseImage, _id, name, tokenValue, courseCode) }}
