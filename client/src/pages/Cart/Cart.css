@@ -21,3 +21,9 @@
     font-weight: 500;
     font-size: 1rem;
 }
+
+.emptyCart {
+    float: right;
+    cursor: pointer;
+    /* text-decoration: underline; */
+}

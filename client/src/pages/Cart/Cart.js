@@ -144,13 +144,13 @@ class Cart extends Component {
                 //hash course id arr and use as comment then decipher in return url  #########
                 let comment = `&comment=${referenceNo}`;
                 let merchantkey = `&merchantKey=${merchantKey}`;
-                let notifyUrl = `&notifyUrl=acucheckout.herokuapp.com/api/payment/success`;
+                // let notifyUrl = `&notifyUrl=acucheckout.herokuapp.com/api/payment/success`;
                 //notify url will use post return url uses get
-                // let notifyUrl = `&notifyUrl=http://localhost:3002/api/payment/success/`;
+                let notifyUrl = `&notifyUrl=http://localhost:3002/api/payment/success/`;
                 // have a increment value in hash url                                ###########
                 let refNo = `&refNo=${referenceNo}`;
-                let returnUrl = `&returnUrl=http://acucheckout.herokuapp.com/api/payment/success/`
-                // let returnUrl = `&returnUrl=http://localhost:3002/api/payment/success/`
+                // let returnUrl = `&returnUrl=http://acucheckout.herokuapp.com/api/payment/success/`
+                let returnUrl = `&returnUrl=http://localhost:3002/api/payment/success/`
                 let urlunhashed = amount + comment + merchantkey+notifyUrl+refNo+returnUrl
 
                 // console.log(urlunhashed)
@@ -197,6 +197,7 @@ class Cart extends Component {
                     <Row>
                         <div className="col-lg-6 p-3">
                             <span className="header">My Cart</span>
+                            <span onClick={this.props.emptyCart} className="emptyCart"> Empty Cart </span>
                             <div id="itemList">
                                 {this.props.addedToCart.map((item, i) => {
                                     return (

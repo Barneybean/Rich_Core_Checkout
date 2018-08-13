@@ -3,7 +3,7 @@ import "./Alert.css"
 
 const Alert = ({notice}) => (
 
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
         {notice}
     </div>
 )

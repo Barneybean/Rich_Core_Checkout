@@ -5,7 +5,7 @@ import { Input, Label} from 'reactstrap'
 const StateDrop = (props) => {
     return (
         <div id="stateDropDown">
-            <Label for="state" style={{color: "black", fontSize: "1em", margin: "12px 2px"}}>State</Label>
+            <Label for="state" style={{color: "black", fontSize: "1em", margin: "15px 2px"}}>State</Label>
             <Input 
                 type="select"
                 name="state" 

@@ -185,12 +185,17 @@ class App extends Component {
         index = j;
       }
     }
-    //remove course from the arr     cannot mutate state directly must  
+    //remove course from the arr     cannot mutate state directly must use splice
     a.splice(index, 1)
     this.setState({addedToCart: a})
     //update local storage too
     let updateCart = JSON.stringify(a);
     this.writeToLocalStorage("cartItems", updateCart);
+  }
+
+  emptyCart = () => {
+    this.setState({addedToCart: []})
+    this.writeToLocalStorage("cartItems", "[]");
   }
 
   render() {
@@ -210,7 +215,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/home" component={Home} />
               <Route exact path="/" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
-              <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
+              <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart} emptyCart={this.emptyCart}/>)}/>
               <Route exact path="/login" component={()=>(<Login createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
               <Redirect from="/student" to="/login" />
               <Redirect from="/admin" to="/login" />
@@ -222,7 +227,7 @@ class App extends Component {
                   <Route exact path="/home" component={Home} />
                   <Route exact path="/admin" component={()=> (<Admin readCookie={this.readCookie} courses={this.state.courses} loadCourses={this.loadCourses} deleteItemInCart={this.deleteItemInCart}/>)} />
                   <Route exact path="/" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
-                  <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
+                  <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart} emptyCart={this.emptyCart}/>)}/>
                   <Route exact path="/login" component={()=>(<Login createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
                   <Redirect from="/student" to="/login" />
                   <Route component={NoMatch} />
@@ -232,9 +237,8 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/student" component={Student} />
                     <Route exact path="/courses" component={() => (<Courses courses={this.state.courses} errorNotice={this.state.errorNotice} selectedCourseForDetail={this.state.selectedCourseForDetail} viewCourseDetail={this.viewCourseDetail} addToCart={this.addToCart} openModal={this.openModal} closeModal={this.closeModal} isModalOpen={this.state.isModalOpen}/>)}/>
-                    <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart}/>)}/>
+                    <Route exact path="/cart" component={()=>(<Cart addedToCart={this.state.addedToCart} deleteItemInCart={this.deleteItemInCart} emptyCart={this.emptyCart}/>)}/>
                     <Route exact path="/login" component={()=>(<Login createCookie={this.createCookie} readCookie={this.readCookie} checkLogIn={this.checkLogIn} logOut={this.logOut}/>)} />
-                    {/* <Route exact path="/api/payment/success/:anything" component={Pending} /> */}
                     <Redirect from="/admin" to="/login" />
                     <Route component={NoMatch} />
                   </Switch>
