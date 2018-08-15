@@ -222,19 +222,19 @@ class Cart extends Component {
                             <div className="row">
                                 <div className="col-md-6">
                                     <PlainInput
-                                        label="First Name"
+                                        label="First Name *"
                                         value={this.state.firstName}
                                         onChange={this.handleInputChange}
                                         name="firstName"
                                     />
                                     <PlainInput
-                                        label="Last Name"
+                                        label="Last Name *"
                                         value={this.state.lastName}
                                         onChange={this.handleInputChange}
                                         name="lastName"
                                     />
                                     <PlainInput
-                                        label="Email"
+                                        label="Email *"
                                         value={this.state.email}
                                         onChange={this.handleInputChange}
                                         name="email"
