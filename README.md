@@ -16,3 +16,6 @@ Technologies used: MongoDB | Express | React JS | Node JS | Cripto JS | RichCore
 
 _Developer: Chunjin (William) Gao_
 _Email: seewilliam.gao@gmail.com_
+
+_Developer: Jinhua Zou_
+_Email: 438455419@qq.com_
