@@ -41,7 +41,7 @@
     "type": "git",
     "url": "git+https://github.com/Barneybean/Rich_Core_Checkout.git"
   },
-  "author": "William Gao, Shawn",
+  "author": "William Gao",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Barneybean/Rich_Core_Checkout/issues"
